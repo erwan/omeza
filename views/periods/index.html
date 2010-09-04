@@ -1,0 +1,65 @@
+{% extends "../base.html" %}
+
+{% block content %}
+
+<div id="graph" hidden="false">
+<div id="chart" class="chart" style="width: 700px; height: 300px; border: solid 1px black;">CHART</div>
+</div>
+
+<br/>
+
+<div style="margin:0px">
+<table class="bbthead" cellpacing="0">
+<thead>
+<tr>
+<!--日付--><th width="100px" >日付(曜日)</th>
+<!--日数--><th width="35px" >日数</th>
+<!--体温--><th width="55px" >体温</th>
+<!--sex--><th width="35px" >sex</th>
+<!--注目--><th width="35px" >注目</th>
+<!--MEMO--><th width="300px" >MEMO</th>
+<!--粘液--><th width="35px" >粘液</th>
+<!--血量--><th width="35px" >血量</th></tr>
+</thead>
+</table></div>
+
+<!--HTML表-->
+<div style="height: 40%; overflow: auto; margin:0px">
+<table class="bbtcycle" cellspacing="0">
+<tbody >
+
+<!-- for each day... -->
+
+<tr> <!-- add class 'today' if it's today -->
+<!--日付-->
+<td class="date" width="100px">
+<!-- date of the day -->
+date
+</td>
+<!--日数--><td class="date centerlize" width="35px" ></td>
+<!--体温--><td width="55px">
+      <!-- %= in_place_editor_field :day, 'temperature', {}, :rows => 1 % -->
+</td>
+<!--sex--><td class="centerlize" width="35px">
+      <!-- %= in_place_editor_field :day, 'sex', {}, :rows => 1 % -->
+</td>
+<!--注目--><td class="centerlize" width="35px">
+      <!-- %= in_place_editor_field :day, 'special', {}, :rows => 1 % -->
+</td>
+<!--MEMO--><td width="300px">
+      <!-- %= in_place_editor_field :day, 'memo', {}, :rows => 1 % -->
+</td>
+<!--粘液--><td class="centerlize"  width="35px">
+      <!-- %= in_place_editor_field :day, 'mucus', {}, :rows => 1 % -->
+</td>
+<!--血量--><td class="centerlize" width="35px">
+      <!-- %= in_place_editor_field :day, 'blood', {}, :rows => 1 % -->
+</td>
+</tr>
+
+<!-- ...end for each day -->
+
+</table></div>
+
+
+{% endblock %}
