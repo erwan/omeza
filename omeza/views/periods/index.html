@@ -1,5 +1,10 @@
 {% extends "../base.html" %}
 
+{% block scripts %}
+<script src="/public/js/closure/goog/base.js"></script>
+<script src="/public/js/periods.js"></script>
+{% endblock %}
+
 {% block content %}
 
 <div id="graph" hidden="false">
@@ -61,5 +66,8 @@ date
 
 </table></div>
 
+<script>
+myproject.start();
+</script>
 
 {% endblock %}
