@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>top</title>
-  <link href="/public/css/default.css" type="text/css" rel="stylesheet" />
-{% block scripts %}
-{% endblock %}
+<title>top</title>
+<link href="/public/css/default.css" type="text/css" rel="stylesheet" />
+{% block styles %}{% endblock %}{% block scripts %}{% endblock %}
 </head>
 
 <body>
@@ -19,7 +18,7 @@
 {% endif %}
 <a class="menu-item" href="/periods/">現在の周期</a>
 <a class="menu-item" href="/compare">比較</a>
-<a class="menu-item" href="/dashboard">記録</a>
+<a class="menu-item" href="/archive">記録</a>
 <a class="menu-item">プリント</a>
 <br>
 <div style="text-align: right;" ><font size=2><a href="{{ logout }}">ログアウト</a></font></div>

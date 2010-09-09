@@ -1,9 +1,12 @@
 {% extends "../base.html" %}
 
-{% block scripts %}
-<script src="/public/js/closure/goog/base.js"></script>
+{% block scripts %}{% if is_dev %}
+<script src="/public/js/goog/base.js"></script>
 <script src="/public/js/periods.js"></script>
-{% endblock %}
+{% else %}
+<script src="/public/js/periods-min.js"></script>
+{% endif %}{% endblock %}
+{% block styles %}<link href="/public/css/datepicker.css" type="text/css" rel="stylesheet" />{% endblock %}
 
 {% block content %}
 
@@ -11,27 +14,29 @@
 <div id="chart" class="chart" style="width: 700px; height: 300px; border: solid 1px black;">CHART</div>
 </div>
 
-<br/>
+<form id="newPeriod" action="/periods/new">
+New period from: <input name="start" id="date-field"> <input type="submit" value="Start">
+</form>
 
 <div style="margin:0px">
 <table class="bbthead" cellpacing="0">
 <thead>
 <tr>
-<!--日付--><th width="100px" >日付(曜日)</th>
-<!--日数--><th width="35px" >日数</th>
-<!--体温--><th width="55px" >体温</th>
-<!--sex--><th width="35px" >sex</th>
-<!--注目--><th width="35px" >注目</th>
-<!--MEMO--><th width="300px" >MEMO</th>
-<!--粘液--><th width="35px" >粘液</th>
-<!--血量--><th width="35px" >血量</th></tr>
+<!--日付--><th width="100px">日付(曜日)</th>
+<!--日数--><th width="35px">日数</th>
+<!--体温--><th width="55px">体温</th>
+<!--sex--><th width="35px">sex</th>
+<!--注目--><th width="35px">注目</th>
+<!--MEMO--><th width="300px">MEMO</th>
+<!--粘液--><th width="35px">粘液</th>
+<!--血量--><th width="35px">血量</th></tr>
 </thead>
 </table></div>
 
 <!--HTML表-->
 <div style="height: 40%; overflow: auto; margin:0px">
 <table class="bbtcycle" cellspacing="0">
-<tbody >
+<tbody>
 
 <!-- for each day... -->
 
@@ -67,7 +72,7 @@ date
 </table></div>
 
 <script>
-myproject.start();
+omeza.periods.init();
 </script>
 
 {% endblock %}

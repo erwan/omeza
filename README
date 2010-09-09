@@ -1,0 +1,3 @@
+1. Download http://code.google.com/closure/library/ and put it in the root as "closure-library"
+2. Download compiler.jar from http://closure-compiler.googlecode.com/files/compiler-latest.zip
+2. ln $PWD/closure-library/closure/goog public/js/
