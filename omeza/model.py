@@ -19,3 +19,8 @@ class Day(db.Expando):
 class Period(db.Expando):
     user = db.UserProperty(auto_current_user_add=True)
     start = db.DateProperty(required=True)
+
+# Search
+
+def periods_by_year(user):
+    return Period.gql("WHERE user = :1 ORDER BY start", user)
