@@ -69,3 +69,12 @@
   /* cells that should be centered */
   table.bbtcycle td.centerlize{ text-align: center;}
 
+.bigmessage {
+  color: rgb(68, 68, 68);
+  text-shadow: white 1px 1px 0;
+  font-family: Helvetica, Arial, Sans;
+  width: 700px;
+  padding-top: 75px;
+  font-size: larger;
+  text-align: center;
+}

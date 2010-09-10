@@ -8,7 +8,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from model import *
+from models import periods
 
 try:
     is_dev = os.environ['SERVER_SOFTWARE'].startswith('Dev')
@@ -22,13 +22,13 @@ class MainPage(webapp.RequestHandler):
         user = users.get_current_user()
         if user is None:
             self.redirect(users.create_login_url(self.request.uri))
-        periods = periods_by_year(user)
+        userperiods = periods.for_user(user)
         path = os.path.join(os.path.dirname(__file__), 'views/archive/index.html')
         template_values = {
             'user': user,
             'logout': users.create_logout_url("/"),
             'is_dev': is_dev,
-            'periods': periods
+            'periods': userperiods
         }
         self.response.out.write(template.render(path, template_values))
 

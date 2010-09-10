@@ -18,18 +18,20 @@
 New period from: <input name="start" id="date-field"> <input type="submit" value="Start">
 </form>
 
+{% if period %}
+
 <div style="margin:0px">
 <table class="bbthead" cellpacing="0">
 <thead>
 <tr>
-<!--日付--><th width="100px">日付(曜日)</th>
-<!--日数--><th width="35px">日数</th>
-<!--体温--><th width="55px">体温</th>
-<!--sex--><th width="35px">sex</th>
-<!--注目--><th width="35px">注目</th>
-<!--MEMO--><th width="300px">MEMO</th>
-<!--粘液--><th width="35px">粘液</th>
-<!--血量--><th width="35px">血量</th></tr>
+<th width="100px">日付(曜日)</th>
+<th width="35px">日数</th>
+<th width="55px">体温</th>
+<th width="35px">sex</th>
+<th width="35px">注目</th>
+<th width="300px">MEMO</th>
+<th width="35px">粘液</th>
+<th width="35px">血量</th></tr>
 </thead>
 </table></div>
 
@@ -38,15 +40,16 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 <table class="bbtcycle" cellspacing="0">
 <tbody>
 
+
 <!-- for each day... -->
 
 <tr> <!-- add class 'today' if it's today -->
 <!--日付-->
 <td class="date" width="100px">
 <!-- date of the day -->
-date
+{{ period.start }}
 </td>
-<!--日数--><td class="date centerlize" width="35px" ></td>
+<!--日数--><td class="date centerlize" width="35px" >1</td>
 <!--体温--><td width="55px">
       <!-- %= in_place_editor_field :day, 'temperature', {}, :rows => 1 % -->
 </td>
@@ -66,10 +69,12 @@ date
       <!-- %= in_place_editor_field :day, 'blood', {}, :rows => 1 % -->
 </td>
 </tr>
-
 <!-- ...end for each day -->
-
 </table></div>
+
+{% else %}
+<div class="bigmessage">No period! Create one to get started.</div>
+{% endif %}
 
 <script>
 omeza.periods.init();
