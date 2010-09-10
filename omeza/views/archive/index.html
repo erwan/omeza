@@ -1,0 +1,107 @@
+{% extends "../base.html" %}
+
+{% block scripts %}
+{% if is_dev %} {% else %} {% endif %}
+{% endblock %}
+
+{% block styles %}
+<style type="text/css">
+table.list{
+    background: #ffc;
+    border: solid 2px #c93;
+    border-collapse: collapse;
+    padding: 10px;
+    font-family: Verdana, sans-serif;
+    }
+table.list th,
+table.list td {
+    border: 1px solid #c93;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    padding: 10px;
+}
+table.list thead th{
+    background: #fc9;
+    border-bottom: 2px solid #c93;
+}
+#long-graph,  #long-chart {
+    background: #ffc;
+    border: solid 2px #c93;
+    padding: 10px;
+    font-family: Verdana, sans-serif;
+    width: 450px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<br/>
+<div>
+
+
+<!-- a style="display: block !important" onclick="javascript:toggle('year<%= year %>');">▼<%= year %></a -->
+  <!-- div id="year<%= year %>" -->
+
+<table id="tbl-<%= year %>" class="list" cellspacing="0">
+  <thead>
+      <tr><th>開始日</th><th>終了日</th><th>周期</th><th>削除</th></tr>
+  </thead>
+  <tbody>
+{% for period in periods %}
+      <tr>
+        <td>link to period</td>
+        <td>{{ period.start }}</td>
+        <td><%= period.days.length.to_s %></td>
+        <td><%= link_to_remote "X", :confirm => "Really delete?",
+                :complete => visual_effect(:BlindUp, "period-#{period.id}"),
+                :url => { :action => "destroy", :id => period.id } %></td>
+      </tr>
+{% endfor %}
+      <tr id="period-other">
+      </tr>
+    <tbody>
+  </table>
+
+  </div>
+  <br/>
+  <% year_start = yperiods[0].start_date.to_s %>
+  <% year_end = yperiods[yperiods.length-1].end_date.to_s %>
+  <div id="long-graph">
+    <font color="f93">長期グラフ</font><br>
+    <form name="graphform" action="<%= url_for :controller=>'periods', :action=>'long_graph' %>">
+    <input id="startdate" name="startdate" value="<%= year_start %>" type="hidden"/>
+    <input id="enddate" name="enddate" value="<%= year_end %>" type="hidden"/>
+    <a id="_startdate_link" href="#" onclick="DatePicker.toggleDatePicker('startdate')" class="demo_link"><%= year_start %></a>　　から　　<a id="_enddate_link" href="#" onclick="DatePicker.toggleDatePicker('enddate')" class="demo_link"><%= year_end %></a>　　まで&nbsp;&nbsp;<%= submit_tag '表示' %>
+    </form>
+  </div>
+  <div id="_startdate_calendar" class="date_picker" style="display:none"></div>
+  <div id="_enddate_calendar" class="date_picker" style="display:none"></div>
+  <br>
+  <div id="long-chart">
+    <font color="f93">長期データ</font><br>
+    <form name="graphform2" action="<%= url_for :controller=>'periods', :action=>'long_data' %>">
+    <input id="startdate2" name="startdate2" value="<%= year_start %>" type="hidden"/>
+    <input id="enddate2" name="enddate2" value="<%= year_end %>" type="hidden"/>
+    <a id="_startdate2_link" href="#" onclick="DatePicker.toggleDatePicker('startdate2')" class="demo_link"><%= year_start %></a>　　から　　<a id="_enddate2_link" href="#" onclick="DatePicker.toggleDatePicker('enddate2')" class="demo_link"><%= year_end %></a>　　まで&nbsp;&nbsp;<%= submit_tag '表示' %>
+    </form>
+  </div>
+  <div id="_startdate2_calendar" class="date_picker" style="display:none"></div>
+  <div id="_enddate2_calendar" class="date_picker" style="display:none"></div>
+<% end %>
+<br/>
+
+<script type="application/x-javascript">
+function toggle(aId) {
+  if ($(aId).getAttribute('hidden') == 'false')
+    $(aId).setAttribute('hidden', 'true');
+  else
+    $(aId).setAttribute('hidden', 'false');
+  if ($(aId).getAttribute('hidden') == 'false')
+    $(aId).setAttribute('style', 'display: block');
+  else
+    $(aId).setAttribute('style', 'display: none');
+}
+</script>
+
+{% endblock %}
