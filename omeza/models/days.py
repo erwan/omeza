@@ -1,6 +1,8 @@
 from google.appengine.ext import db
 
-class Day(db.Expando):
+import datetime
+
+class day(db.Expando):
     user = db.UserProperty(auto_current_user_add=True)
     date = db.DateProperty(required=True)
     temperature = db.FloatProperty()
@@ -9,3 +11,4 @@ class Day(db.Expando):
     memo = db.TextProperty()
     mucus = db.IntegerProperty()
     blood = db.IntegerProperty()
+

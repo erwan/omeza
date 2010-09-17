@@ -39,7 +39,6 @@ table.list thead th{
 <br/>
 <div>
 
-
 <!-- a style="display: block !important" onclick="javascript:toggle('year<%= year %>');">▼<%= year %></a -->
   <!-- div id="year<%= year %>" -->
 
@@ -50,12 +49,10 @@ table.list thead th{
   <tbody>
 {% for period in periods %}
       <tr>
-        <td>link to period</td>
-        <td>{{ period.start }}</td>
-        <td><%= period.days.length.to_s %></td>
-        <td><%= link_to_remote "X", :confirm => "Really delete?",
-                :complete => visual_effect(:BlindUp, "period-#{period.id}"),
-                :url => { :action => "destroy", :id => period.id } %></td>
+        <td><a href="#">{{ period.start }}</a></td>
+        <td>{{ period.end }}</td>
+        <td>{{ period.length }}</td>
+        <td><button onclick="confirmDelete('{{ period.key }}')">Delete</button></td>
       </tr>
 {% endfor %}
       <tr id="period-other">
@@ -90,18 +87,5 @@ table.list thead th{
   <div id="_enddate2_calendar" class="date_picker" style="display:none"></div>
 <% end %>
 <br/>
-
-<script type="application/x-javascript">
-function toggle(aId) {
-  if ($(aId).getAttribute('hidden') == 'false')
-    $(aId).setAttribute('hidden', 'true');
-  else
-    $(aId).setAttribute('hidden', 'false');
-  if ($(aId).getAttribute('hidden') == 'false')
-    $(aId).setAttribute('style', 'display: block');
-  else
-    $(aId).setAttribute('style', 'display: none');
-}
-</script>
 
 {% endblock %}

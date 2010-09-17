@@ -1,7 +1,7 @@
 import os
 import logging
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -20,16 +20,23 @@ class MainPage(webapp.RequestHandler):
     def indexGet(self, user):
         global is_dev
         path = os.path.join(os.path.dirname(__file__), 'views/periods/index.html')
+        p = periods.last_for(user)
+        d = None
+        if p is not None:
+            d = p.days()
         template_values = {
             'user': user,
-            'period': periods.last_for(user),
+            'period': p,
+            'pdays': d,
+            'today': date.today(),
             'logout': users.create_logout_url("/"),
             'is_dev': is_dev
         }
         self.response.out.write(template.render(path, template_values))
 
     def newPeriod(self, start):
-        newPeriod = periods.period(start=start)
+        end = start + timedelta(days=28)
+        newPeriod = periods.period(start=start, end=end)
         newPeriod.put()
         self.redirect("/periods/")
 

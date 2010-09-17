@@ -21,7 +21,7 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 {% if period %}
 
 <div style="margin:0px">
-<table class="bbthead" cellpacing="0">
+<table class="bbtcycle" cellpacing="0">
 <thead>
 <tr>
 <th width="100px">日付(曜日)</th>
@@ -33,23 +33,18 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 <th width="35px">粘液</th>
 <th width="35px">血量</th></tr>
 </thead>
-</table></div>
 
-<!--HTML表-->
-<div style="height: 40%; overflow: auto; margin:0px">
-<table class="bbtcycle" cellspacing="0">
-<tbody>
-
-
-<!-- for each day... -->
-
-<tr> <!-- add class 'today' if it's today -->
+{% for day in pdays %}
+<tr
+{% ifequal day.date: today %}
+    class="today"
+{% endifequal %}
+> <!-- add class 'today' if it's today -->
 <!--日付-->
 <td class="date" width="100px">
-<!-- date of the day -->
-{{ period.start }}
+{{ day.date }}
 </td>
-<!--日数--><td class="date centerlize" width="35px" >1</td>
+<!--日数--><td class="date centerlize" width="35px" >{{ forloop.counter }}</td>
 <!--体温--><td width="55px">
       <!-- %= in_place_editor_field :day, 'temperature', {}, :rows => 1 % -->
 </td>
@@ -70,6 +65,7 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 </td>
 </tr>
 <!-- ...end for each day -->
+{% endfor %}
 </table></div>
 
 {% else %}

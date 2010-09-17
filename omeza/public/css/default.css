@@ -45,29 +45,35 @@
   }
 
   /* The whole header */
-  table.bbthead {
-    border: 2px #c93 solid; border-bottom: 3px #c93;
-    border-collapse: collapse;background-color: #fc9;  font-family: Verdana, sans-serif;
+  table.bbtcycle {
+    font-family: Verdana, sans-serif;
   }
 
-  /* header th */
-  table.bbthead th{ border-style: solid dashed;  border-width: 1px; border-color: #c93; padding: 0.3em; font-size:80%;}
+  .bbtcycle th{
+    background-color: #fc9;
+    border: 2px #c93 solid; border-bottom: 3px #c93;
+    border-collapse: collapse;
+    border-style: solid dashed;
+    border-width: 1px;
+    border-color: #c93;
+    padding: 0.3em;
+    font-size:80%;
+  }
 
-  /* sheet (scrollable part) */
-  table.bbtcycle{border: 2px #c93 solid; border-collapse: collapse; font-family: Verdana,sans-serif;}
+  .bbtcycle {border: 2px #c93 solid; border-collapse: collapse; font-family: Verdana,sans-serif;}
 
   /* cells */
-  table.bbtcycle td{ border-style:/*横ー縦*/ solid dashed; border-color: #c93; border-width: 1px; padding: 0.3em; font-size: 80%;}
+  .bbtcycle td{ border-style:/*横ー縦*/ solid dashed; border-color: #c93; border-width: 1px; padding: 0.3em; font-size: 80%;}
 
   /* date cells */
-  table.bbtcycle td.date{ background-color: #ffc; font-weight: bold; font-size: 80%;}
+  .bbtcycle td.date{ background-color: #ffc; font-weight: bold; font-size: 80%;}
 
   /* date cell for today */
-  table.bbtcycle tr.date-today { background-color: #fdd; }
-  table.bbtcycle tr.date-today td.date{ background-color: #fdd; }
+  .bbtcycle tr.date-today { background-color: #fdd; }
+  .bbtcycle tr.date-today td.date{ background-color: #fdd; }
 
   /* cells that should be centered */
-  table.bbtcycle td.centerlize{ text-align: center;}
+  .bbtcycle td.centerlize{ text-align: center;}
 
 .bigmessage {
   color: rgb(68, 68, 68);
