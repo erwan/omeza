@@ -12,3 +12,5 @@ class day(db.Expando):
     mucus = db.IntegerProperty()
     blood = db.IntegerProperty()
 
+    def today(self):
+        return datetime.date.today() == self.date

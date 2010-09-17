@@ -1,14 +1,20 @@
-{% extends "../base.html" %}
+## -*- coding: utf-8 -*-
 
-{% block scripts %}{% if is_dev %}
+<%inherit file="../base.html"/>
+
+<%def name="scripts()">
+% if is_dev == True:
 <script src="/public/js/goog/base.js"></script>
 <script src="/public/js/periods.js"></script>
-{% else %}
+% else:
 <script src="/public/js/periods-min.js"></script>
-{% endif %}{% endblock %}
-{% block styles %}<link href="/public/css/datepicker.css" type="text/css" rel="stylesheet" />{% endblock %}
+% endif
+</%def>
+<%def name="styles()">
+<link href="/public/css/datepicker.css" type="text/css" rel="stylesheet" />
+</%def>
 
-{% block content %}
+<%def name="body()">
 
 <div id="graph" hidden="false">
 <div id="chart" class="chart" style="width: 700px; height: 300px; border: solid 1px black;">CHART</div>
@@ -18,7 +24,7 @@
 New period from: <input name="start" id="date-field"> <input type="submit" value="Start">
 </form>
 
-{% if period %}
+% if period:
 
 <div style="margin:0px">
 <table class="bbtcycle" cellpacing="0">
@@ -34,17 +40,17 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 <th width="35px">血量</th></tr>
 </thead>
 
-{% for day in pdays %}
+% for day in pdays:
 <tr
-{% ifequal day.date: today %}
+% if day.today():
     class="today"
-{% endifequal %}
+% endif
 > <!-- add class 'today' if it's today -->
 <!--日付-->
 <td class="date" width="100px">
-{{ day.date }}
+${day.date}
 </td>
-<!--日数--><td class="date centerlize" width="35px" >{{ forloop.counter }}</td>
+<!--日数--><td class="date centerlize" width="35px" >1</td>
 <!--体温--><td width="55px">
       <!-- %= in_place_editor_field :day, 'temperature', {}, :rows => 1 % -->
 </td>
@@ -65,15 +71,15 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 </td>
 </tr>
 <!-- ...end for each day -->
-{% endfor %}
+% endfor
 </table></div>
 
-{% else %}
+% else:
 <div class="bigmessage">No period! Create one to get started.</div>
-{% endif %}
+% endif
 
 <script>
 omeza.periods.init();
 </script>
 
-{% endblock %}
+</%def>

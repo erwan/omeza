@@ -5,8 +5,10 @@ from datetime import date, datetime, timedelta
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
+
+from mako.template import Template
+from mako.lookup import TemplateLookup
 
 from models import periods
 
@@ -20,6 +22,7 @@ class MainPage(webapp.RequestHandler):
     def indexGet(self, user):
         global is_dev
         path = os.path.join(os.path.dirname(__file__), 'views/periods/index.html')
+        mylookup = TemplateLookup(directories=[os.path.join(os.path.dirname(__file__), 'views')])
         p = periods.last_for(user)
         d = None
         if p is not None:
@@ -32,7 +35,9 @@ class MainPage(webapp.RequestHandler):
             'logout': users.create_logout_url("/"),
             'is_dev': is_dev
         }
-        self.response.out.write(template.render(path, template_values))
+        mytemplate = mylookup.get_template('periods/index.html')
+        self.response.out.write(mytemplate.render(**template_values))
+        # self.response.out.write(Template(filename=path, lookup=lookupdirs).render(**template_values))
 
     def newPeriod(self, start):
         end = start + timedelta(days=28)
