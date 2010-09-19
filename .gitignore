@@ -1,4 +1,9 @@
 *.pyc
 closure-library/
 compiler.jar
-
+.classpath
+.project
+eclipse
+.settings
+tmp/
+appengine-generated

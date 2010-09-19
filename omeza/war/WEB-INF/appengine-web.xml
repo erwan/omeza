@@ -1,0 +1,5 @@
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+	<application>omezacycle</application>
+	<version>play</version>
+</appengine-web-app>
+

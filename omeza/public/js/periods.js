@@ -8,7 +8,7 @@ goog.require('goog.ui.InputDatePicker');
 periods = {};
 
 periods.init = function() {
-  var PATTERN = "dd'/'MM'/'yyyy";
+  var PATTERN = "yyyy'-'MM'-'dd";
   var formatter = new goog.i18n.DateTimeFormat(PATTERN);
   var parser = new goog.i18n.DateTimeParse(PATTERN);
  

@@ -3,30 +3,30 @@
 <head>
 <title>top</title>
 <link href="/public/css/default.css" type="text/css" rel="stylesheet" />
-{% block styles %}{% endblock %}{% block scripts %}{% endblock %}
+#{get 'styles' /}
+#{get 'scripts' /}
 </head>
 
 <body>
 
 <div id="menu-bar" style="float: left;">
-{% if user %}
+#{if user}
 <div style="padding:5px">
 ようこそ<br>
-<font size=3 color=#ff9933><b>{{ user.nickname }}さん</b></font>
+<font size=3 color=#ff9933><b>${user.nickname}さん</b></font>
 <br>
 </div>
-{% endif %}
+#{/}
 <a class="menu-item" href="/periods/">現在の周期</a>
 <a class="menu-item" href="/compare">比較</a>
 <a class="menu-item" href="/archive">記録</a>
 <a class="menu-item">プリント</a>
 <br>
-<div style="text-align: right;" ><font size=2><a href="{{ logout }}">ログアウト</a></font></div>
+<div style="text-align: right;" ><font size=2><a href="@{Application.logout()}">ログアウト</a></font></div>
 </div>
 
 <div id="main-content">
-{% block content %}
-{% endblock %}
+#{doLayout /}
 </div>
 
 </body>

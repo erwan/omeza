@@ -1,25 +1,29 @@
-{% extends "../base.html" %}
+#{extends 'main.html' /}
+#{set title:'Home' /}
 
-{% block scripts %}{% if is_dev %}
+#{set 'scripts'}
+#{if play.Play.mode.isDev()}
 <script src="/public/js/goog/base.js"></script>
 <script src="/public/js/periods.js"></script>
-{% else %}
+#{/}
+#{else}
 <script src="/public/js/periods-min.js"></script>
-{% endif %}{% endblock %}
-{% block styles %}<link href="/public/css/datepicker.css" type="text/css" rel="stylesheet" />{% endblock %}
+#{/}
+#{/}
 
-{% block content %}
+#{set 'styles'}
+<link href="/public/css/datepicker.css" type="text/css" rel="stylesheet" />
+#{/}
 
 <div id="graph" hidden="false">
 <div id="chart" class="chart" style="width: 700px; height: 300px; border: solid 1px black;">CHART</div>
 </div>
 
-<form id="newPeriod" action="/periods/new">
+<form id="newPeriod" action="@{Application.newPeriod()}">
 New period from: <input name="start" id="date-field"> <input type="submit" value="Start">
 </form>
 
-{% if period %}
-
+#{if period}
 <div style="margin:0px">
 <table class="bbtcycle" cellpacing="0">
 <thead>
@@ -34,17 +38,14 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 <th width="35px">血量</th></tr>
 </thead>
 
-{% for day in pdays %}
-<tr
-{% ifequal day.date: today %}
-    class="today"
-{% endifequal %}
-> <!-- add class 'today' if it's today -->
+{% c = 1 %}
+#{list period.days(), as:'day'}
+<tr #{if day.date == today}class="today"#{/} >
 <!--日付-->
 <td class="date" width="100px">
-{{ day.date }}
+${day.date.format("yyyy'/'MM'/'dd")}
 </td>
-<!--日数--><td class="date centerlize" width="35px" >{{ forloop.counter }}</td>
+<!--日数--><td class="date centerlize" width="35px" >${c}{% c++ %}</td>
 <!--体温--><td width="55px">
       <!-- %= in_place_editor_field :day, 'temperature', {}, :rows => 1 % -->
 </td>
@@ -65,15 +66,14 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 </td>
 </tr>
 <!-- ...end for each day -->
-{% endfor %}
+#{/list}
 </table></div>
 
-{% else %}
+#{/if}
+#{else}
 <div class="bigmessage">No period! Create one to get started.</div>
-{% endif %}
+#{/else}
 
 <script>
 omeza.periods.init();
 </script>
-
-{% endblock %}
