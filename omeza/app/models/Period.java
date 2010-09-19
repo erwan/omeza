@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import play.Logger;
 import siena.Id;
 import siena.Model;
 import siena.Query;
@@ -40,7 +39,7 @@ public class Period extends Model {
     }
 
     public List<Day> days() {
-        List<Day> days = Day.all().filter("user", user).filter("date>", start).filter("date<", end).fetch();
+        List<Day> days = Day.between(user, start, end);
         if (days.size() == 0) {
             for (int i = 0; i < length(); i++) {
                 new Day(user, DateUtils.addDays(start, i)).insert();
@@ -59,7 +58,7 @@ public class Period extends Model {
         } else {
             return days;
         }
-        return Day.all().filter("user", user).filter("date>", start).filter("date<", end).fetch();
+        return Day.between(user, start, end);
     }
 
     public static Query<Period> all() {

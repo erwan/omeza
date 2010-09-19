@@ -1,7 +1,7 @@
 package models;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import siena.Id;
 import siena.Model;
@@ -26,14 +26,18 @@ public class Day extends Model {
     }
 
     public static Query<Day> all() {
-        return Model.all(Day.class);
+        return Model.all(Day.class).order("date");
+    }
+
+    public static List<Day> between(String user, Date start, Date end) {
+        return Day.all().filter("user", user).filter("date>=", start).filter("date<=", end).fetch();
     }
 
     public static Day findById(Long id) {
         return all().filter("id", id).get();
     }
 
-    public static Collection<Day> findByUser(String user) {
+    public static List<Day> findByUser(String user) {
         return all().filter("user", user).fetch();
     }
 

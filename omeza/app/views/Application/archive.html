@@ -44,10 +44,10 @@ table.list thead th{
   <tbody>
 #{list periods, as:'period'}
       <tr>
-        <td><a href="#">${period.start}</a></td>
+        <td><a href="@{Application.period(period.id)}">${period.start}</a></td>
         <td>${period.end}</td>
-        <td>${period.length}</td>
-        <td><button onclick="confirmDelete('${period.key}')">Delete</button></td>
+        <td>${period.length()}</td>
+        <td><button onclick="confirmDelete('${period.id}')">Delete</button></td>
       </tr>
 #{/}
       <tr id="period-other">
