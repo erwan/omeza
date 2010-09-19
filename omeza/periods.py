@@ -36,7 +36,7 @@ class MainPage(webapp.RequestHandler):
             'is_dev': is_dev
         }
         mytemplate = mylookup.get_template('periods/index.html')
-        self.response.out.write(mytemplate.render(**template_values))
+        self.response.out.write(mytemplate.render(**template_values).decode("utf-8"))
         # self.response.out.write(Template(filename=path, lookup=lookupdirs).render(**template_values))
 
     def newPeriod(self, start):
