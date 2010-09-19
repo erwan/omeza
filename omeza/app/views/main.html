@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>top</title>
+<title>#{get 'title' /}</title>
 <link href="/public/css/default.css" type="text/css" rel="stylesheet" />
 #{get 'styles' /}
 #{get 'scripts' /}
@@ -11,18 +11,14 @@
 
 <div id="menu-bar" style="float: left;">
 #{if user}
-<div style="padding:5px">
-ようこそ<br>
-<font size=3 color=#ff9933><b>${user.nickname}さん</b></font>
-<br>
-</div>
+<div style="padding:5px; color: #f93; font-weight: bold;">&{'welcome', user.nickname}</div>
 #{/}
-<a class="menu-item" href="/periods/">現在の周期</a>
-<a class="menu-item" href="/compare">比較</a>
-<a class="menu-item" href="/archive">記録</a>
-<a class="menu-item">プリント</a>
+<a class="menu-item" href="@{Application.index}">&{'currentPeriod'}</a>
+<a class="menu-item" href="/compare">&{'compare'}</a>
+<a class="menu-item" href="@{Application.archive}">&{'archive'}</a>
+<a class="menu-item">&{'print'}</a>
 <br>
-<div style="text-align: right;" ><font size=2><a href="@{Application.logout()}">ログアウト</a></font></div>
+<div style="text-align: right;" ><font size=2><a href="@{Application.logout()}">&{'logout'}</a></font></div>
 </div>
 
 <div id="main-content">

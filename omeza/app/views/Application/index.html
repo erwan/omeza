@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Omeza - Home' /}
 
 #{set 'scripts'}
 #{if play.Play.mode.isDev()}
@@ -20,7 +20,7 @@
 </div>
 
 <form id="newPeriod" action="@{Application.newPeriod()}">
-New period from: <input name="start" id="date-field"> <input type="submit" value="Start">
+&{'newPeriod'}<input name="start" id="date-field"> <input type="submit" value="Start">
 </form>
 
 #{if period}
@@ -28,14 +28,14 @@ New period from: <input name="start" id="date-field"> <input type="submit" value
 <table class="bbtcycle" cellpacing="0">
 <thead>
 <tr>
-<th width="100px">日付(曜日)</th>
-<th width="35px">日数</th>
-<th width="55px">体温</th>
-<th width="35px">sex</th>
-<th width="35px">注目</th>
-<th width="300px">MEMO</th>
-<th width="35px">粘液</th>
-<th width="35px">血量</th></tr>
+<th width="100px">&{'date'}</th>
+<th width="35px">&{'dayno'}</th>
+<th width="55px">&{'temperature'}</th>
+<th width="35px">&{'sex'}</th>
+<th width="35px">&{'special'}</th>
+<th width="300px">&{'memo'}</th>
+<th width="35px">&{'mucus'}</th>
+<th width="35px">&{'blood'}</th></tr>
 </thead>
 
 {% c = 1 %}

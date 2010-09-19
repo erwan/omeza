@@ -1,10 +1,7 @@
-{% extends "../base.html" %}
+#{extends 'main.html' /}
+#{set title:'Home' /}
 
-{% block scripts %}
-{% if is_dev %} {% else %} {% endif %}
-{% endblock %}
-
-{% block styles %}
+#{set 'styles'}
 <style type="text/css">
 table.list{
     background: #ffc;
@@ -32,9 +29,7 @@ table.list thead th{
     width: 450px;
     }
 </style>
-{% endblock %}
-
-{% block content %}
+#{/}
 
 <br/>
 <div>
@@ -47,14 +42,14 @@ table.list thead th{
       <tr><th>開始日</th><th>終了日</th><th>周期</th><th>削除</th></tr>
   </thead>
   <tbody>
-{% for period in periods %}
+#{list periods, as:'period'}
       <tr>
-        <td><a href="#">{{ period.start }}</a></td>
-        <td>{{ period.end }}</td>
-        <td>{{ period.length }}</td>
-        <td><button onclick="confirmDelete('{{ period.key }}')">Delete</button></td>
+        <td><a href="#">${period.start}</a></td>
+        <td>${period.end}</td>
+        <td>${period.length}</td>
+        <td><button onclick="confirmDelete('${period.key}')">Delete</button></td>
       </tr>
-{% endfor %}
+#{/}
       <tr id="period-other">
       </tr>
     <tbody>
@@ -88,4 +83,3 @@ table.list thead th{
 <% end %>
 <br/>
 
-{% endblock %}

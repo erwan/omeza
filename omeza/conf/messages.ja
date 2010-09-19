@@ -1,0 +1,18 @@
+
+welcome=ようこそ%sさん
+currentPeriod=現在の周期
+compare=比較
+archive=記録
+print=プリント
+logout=ログアウト
+
+newPeriod=New period from:
+
+date=日付(曜日)
+dayno=日数
+temperature=体温
+sex=sex
+special=注目
+memo=MEMO
+mucus=粘液
+blood=血量
