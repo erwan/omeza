@@ -22,20 +22,6 @@ public class Application extends Controller {
         render("Application/index.html", period);
     }
 
-    public static void newPeriod(Date start) {
-        new Period(GAE.getUser().getEmail(), start).insert();
-        index();
-    }
-
-    public static void delete(Long periodId) {
-        Period period = Period.findById(periodId);
-        if (period == null || !getEmail().equals(period.user)) {
-            badRequest();
-        }
-        period.delete();
-        renderText("OK");
-    }
-
     public static void archive() {
         List<Period> periods = Period.all().filter("user", getEmail()).order("-start").fetch();
         render(periods);

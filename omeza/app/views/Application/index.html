@@ -3,6 +3,7 @@
 
 #{set 'scripts'}
 <script src="/public/js/periods.js"></script>
+<script src="/public/js/jquery.jeditable.mini.js"></script>
 #{/}
 %{ m = play.i18n.Messages.&get }%
 
@@ -13,7 +14,7 @@
 <div id="chart" class="chart" style="width: 700px; height: 300px; border: solid 1px black;">CHART</div>
 </div>
 
-<form id="newPeriod" action="@{Application.newPeriod()}">
+<form id="newPeriod" action="@{Periods.create()}">
 &{'newPeriod'}<input name="start" id="date-field"> <input type="submit" value="Start">
 </form>
 
@@ -41,23 +42,22 @@ ${day.date.format(m('dateformat'))}
 </td>
 <td class="date centerlize" width="35px" >${c}{% c++ %}</td>
 <td width="55px">
-    <div id="temp${day.id}" class="inplace">37</div>
-    <!-- %= in_place_editor_field :day, 'temperature', {}, :rows => 1 % -->
+    <div id="temperature-${day.id}" class="inplace">${day.temperature ? day.temperature / 10 : ""}</div>
 </td>
 <td class="centerlize" width="35px">
-    <!-- %= in_place_editor_field :day, 'sex', {}, :rows => 1 % -->
+    <div id="sex-${day.id}" class="inplace">${day.sex}</div>
 </td>
 <td class="centerlize" width="35px">
-    <!-- %= in_place_editor_field :day, 'special', {}, :rows => 1 % -->
+    <div id="special-${day.id}" class="inplace">${day.special}</div>
 </td>
 <!--MEMO--><td width="300px">
-    <!-- %= in_place_editor_field :day, 'memo', {}, :rows => 1 % -->
+    <div id="memo-${day.id}" class="inplace">${day.memo}</div>
 </td>
 <!--粘液--><td class="centerlize"  width="35px">
-    <!-- %= in_place_editor_field :day, 'mucus', {}, :rows => 1 % -->
+    <div id="mucus-${day.id}" class="inplace">${day.mucus}</div>
 </td>
 <!--血量--><td class="centerlize" width="35px">
-    <!-- %= in_place_editor_field :day, 'blood', {}, :rows => 1 % -->
+    <div id="blood-${day.id}" class="inplace">${day.blood}</div>
 </td>
 </tr>
 <!-- ...end for each day -->
@@ -70,6 +70,7 @@ ${day.date.format(m('dateformat'))}
 #{/else}
 
 <script>
+var editURL = "@{Periods.edit()}";
 $(function(){
     Periods.init();
 });
