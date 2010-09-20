@@ -5,6 +5,7 @@ import java.util.List;
 
 import models.Period;
 import play.modules.gae.GAE;
+import play.modules.gae.WS;
 import play.mvc.Before;
 import play.mvc.Controller;
 
@@ -24,6 +25,15 @@ public class Application extends Controller {
     public static void newPeriod(Date start) {
         new Period(GAE.getUser().getEmail(), start).insert();
         index();
+    }
+
+    public static void delete(Long periodId) {
+        Period period = Period.findById(periodId);
+        if (period == null || !getEmail().equals(period.user)) {
+            badRequest();
+        }
+        period.delete();
+        renderText("OK");
     }
 
     public static void archive() {

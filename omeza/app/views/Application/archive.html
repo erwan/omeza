@@ -31,23 +31,46 @@ table.list thead th{
 </style>
 #{/}
 
+#{set 'scripts'}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+#{/}
+
+%{ m = play.i18n.Messages.&get }%
 <br/>
 <div>
 
 <!-- a style="display: block !important" onclick="javascript:toggle('year<%= year %>');">▼<%= year %></a -->
   <!-- div id="year<%= year %>" -->
 
+<script>
+function confirmDelete(periodId) {
+    if (confirm("Really delete?")) {
+        $.post("@{Application.delete()}",
+            {periodId: periodId},
+            function() {
+                $("#periodTR" + periodId).fadeOut();
+            }
+        );
+    }
+}
+</script>
+
 <table id="tbl-<%= year %>" class="list" cellspacing="0">
   <thead>
-      <tr><th>開始日</th><th>終了日</th><th>周期</th><th>削除</th></tr>
+    <tr>
+        <th>&{'archive.start'}</th>
+        <th>&{'archive.end'}</th>
+        <th>&{'archive.length'}</th>
+        <th>&{'archive.delete'}</th>
+    </tr>
   </thead>
   <tbody>
 #{list periods, as:'period'}
-      <tr>
-        <td><a href="@{Application.period(period.id)}">${period.start}</a></td>
-        <td>${period.end}</td>
+      <tr id="periodTR${period.id}">
+        <td><a href="@{Application.period(period.id)}">${period.start.format(m('dateformat'))}</a></td>
+        <td>${period.end.format(m('dateformat'))}</td>
         <td>${period.length()}</td>
-        <td><button onclick="confirmDelete('${period.id}')">Delete</button></td>
+        <td><button onclick="confirmDelete(${period.id})">Delete</button></td>
       </tr>
 #{/}
       <tr id="period-other">
@@ -80,6 +103,5 @@ table.list thead th{
   </div>
   <div id="_startdate2_calendar" class="date_picker" style="display:none"></div>
   <div id="_enddate2_calendar" class="date_picker" style="display:none"></div>
-<% end %>
 <br/>
 

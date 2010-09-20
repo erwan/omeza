@@ -1,3 +1,4 @@
+dateformat=yyyy'/'MM'/'dd
 
 welcome=ようこそ%sさん
 currentPeriod=現在の周期
@@ -16,3 +17,8 @@ special=注目
 memo=MEMO
 mucus=粘液
 blood=血量
+
+archive.start=開始日
+archive.end=終了日
+archive.length=周期
+archive.delete=削除

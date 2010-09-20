@@ -10,6 +10,7 @@
 <script src="/public/js/periods-min.js"></script>
 #{/}
 #{/}
+%{ m = play.i18n.Messages.&get }%
 
 #{set 'styles'}
 <link href="/public/css/datepicker.css" type="text/css" rel="stylesheet" />
@@ -43,7 +44,7 @@
 <tr #{if day.date == today}class="today"#{/} >
 <!--日付-->
 <td class="date" width="100px">
-${day.date.format("yyyy'/'MM'/'dd")}
+${day.date.format(m('dateformat'))}
 </td>
 <!--日数--><td class="date centerlize" width="35px" >${c}{% c++ %}</td>
 <!--体温--><td width="55px">
