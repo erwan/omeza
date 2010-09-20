@@ -45,7 +45,7 @@ table.list thead th{
 <script>
 function confirmDelete(periodId) {
     if (confirm("Really delete?")) {
-        $.post("@{Period.delete()}",
+        $.post("@{Periods.delete()}",
             {periodId: periodId},
             function() {
                 $("#periodTR" + periodId).fadeOut();
