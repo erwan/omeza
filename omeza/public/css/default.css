@@ -84,3 +84,5 @@
   font-size: larger;
   text-align: center;
 }
+
+.ui-widget { font-size: 0.8em; }

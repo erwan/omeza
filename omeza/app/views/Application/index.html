@@ -2,18 +2,11 @@
 #{set title:'Omeza - Home' /}
 
 #{set 'scripts'}
-#{if play.Play.mode.isDev()}
-<script src="/public/js/goog/base.js"></script>
 <script src="/public/js/periods.js"></script>
-#{/}
-#{else}
-<script src="/public/js/periods-min.js"></script>
-#{/}
 #{/}
 %{ m = play.i18n.Messages.&get }%
 
 #{set 'styles'}
-<link href="/public/css/datepicker.css" type="text/css" rel="stylesheet" />
 #{/}
 
 <div id="graph" hidden="false">
@@ -42,28 +35,29 @@
 {% c = 1 %}
 #{list period.days(), as:'day'}
 <tr #{if day.date == today}class="today"#{/} >
-<!--日付-->
+
 <td class="date" width="100px">
 ${day.date.format(m('dateformat'))}
 </td>
-<!--日数--><td class="date centerlize" width="35px" >${c}{% c++ %}</td>
-<!--体温--><td width="55px">
-      <!-- %= in_place_editor_field :day, 'temperature', {}, :rows => 1 % -->
+<td class="date centerlize" width="35px" >${c}{% c++ %}</td>
+<td width="55px">
+    <div id="temp${day.id}" class="inplace">37</div>
+    <!-- %= in_place_editor_field :day, 'temperature', {}, :rows => 1 % -->
 </td>
-<!--sex--><td class="centerlize" width="35px">
-      <!-- %= in_place_editor_field :day, 'sex', {}, :rows => 1 % -->
+<td class="centerlize" width="35px">
+    <!-- %= in_place_editor_field :day, 'sex', {}, :rows => 1 % -->
 </td>
-<!--注目--><td class="centerlize" width="35px">
-      <!-- %= in_place_editor_field :day, 'special', {}, :rows => 1 % -->
+<td class="centerlize" width="35px">
+    <!-- %= in_place_editor_field :day, 'special', {}, :rows => 1 % -->
 </td>
 <!--MEMO--><td width="300px">
-      <!-- %= in_place_editor_field :day, 'memo', {}, :rows => 1 % -->
+    <!-- %= in_place_editor_field :day, 'memo', {}, :rows => 1 % -->
 </td>
 <!--粘液--><td class="centerlize"  width="35px">
-      <!-- %= in_place_editor_field :day, 'mucus', {}, :rows => 1 % -->
+    <!-- %= in_place_editor_field :day, 'mucus', {}, :rows => 1 % -->
 </td>
 <!--血量--><td class="centerlize" width="35px">
-      <!-- %= in_place_editor_field :day, 'blood', {}, :rows => 1 % -->
+    <!-- %= in_place_editor_field :day, 'blood', {}, :rows => 1 % -->
 </td>
 </tr>
 <!-- ...end for each day -->
@@ -76,5 +70,7 @@ ${day.date.format(m('dateformat'))}
 #{/else}
 
 <script>
-omeza.periods.init();
+$(function(){
+    Periods.init();
+});
 </script>
