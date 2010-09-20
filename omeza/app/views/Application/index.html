@@ -2,6 +2,8 @@
 #{set title:'Omeza - Home' /}
 
 #{set 'scripts'}
+<!--[if IE]><script language="javascript" type="text/javascript" src="/public/js/flot/excanvas.pack.js"></script><![endif]-->
+<script src="/public/js/flot/jquery.flot.min.js"></script>
 <script src="/public/js/periods.js"></script>
 <script src="/public/js/jquery.jeditable.mini.js"></script>
 #{/}
@@ -11,7 +13,7 @@
 #{/}
 
 <div id="graph" hidden="false">
-<div id="chart" class="chart" style="width: 700px; height: 300px; border: solid 1px black;">CHART</div>
+<div id="chart" class="chart" style="width: 700px; height: 300px; "></div>
 </div>
 
 <form id="newPeriod" action="@{Periods.create()}">
@@ -71,6 +73,7 @@ ${day.date.format(m('dateformat'))}
 
 <script>
 var editURL = "@{Periods.edit()}";
+var jsonURL = "@{Periods.json(period.id)}";
 $(function(){
     Periods.init();
 });
