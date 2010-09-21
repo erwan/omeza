@@ -1,19 +1,30 @@
 package controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import models.Period;
+import play.Play;
+import play.Play.Mode;
+import play.i18n.Lang;
+import play.i18n.Messages;
 import play.modules.gae.GAE;
-import play.modules.gae.WS;
 import play.mvc.Before;
 import play.mvc.Controller;
+
+import com.google.gson.Gson;
+
 
 public class Application extends Controller {
 
     public static void index() {
         Period period = Period.lastPeriodFor(getEmail());
         render(period);
+    }
+
+    public static void i18n() {
+        response.contentType = "application/javascript";
+        if (Play.mode == Mode.PROD) response.cacheFor("3h");
+        renderText("var i18n = " + new Gson().toJson(Messages.all(Lang.get())));
     }
 
     public static void period(Long periodId) {

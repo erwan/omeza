@@ -44,12 +44,29 @@ public class Day extends Model {
 
     public String updateField(String field, String value) {
         if ("temperature".equals(field)) {
-            this.temperature = new BigDecimal(value).multiply(BigDecimal.TEN).intValue();
+            String result = "";
+            if (value == null || "".equals(value)) {
+                this.temperature = null;
+            } else {
+                this.temperature = new BigDecimal(value).multiply(BigDecimal.TEN).intValue();
+                result = value;
+                if (this.temperature <= 0) {
+                    this.temperature = null;
+                    result = "";
+                }
+            }
+            this.update();
+            return result;
+        }
+        if ("sex".equals(field)) {
+            if ("".equals(value) || " ".equals(value)) value = null;
+            this.sex = value;
             this.update();
             return value;
         }
-        if ("sex".equals(field)) {
-            this.sex = value;
+        if ("special".equals(field)) {
+            if ("".equals(value) || " ".equals(value)) value = null;
+            this.special = value;
             this.update();
             return value;
         }
