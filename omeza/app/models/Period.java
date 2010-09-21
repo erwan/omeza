@@ -19,27 +19,35 @@ public class Period extends Model {
 
     public String user;
     public Date start;
-    public Date end;
+
+    public static final int DEFAULT_LENGTH = 28;
 
     public Period(String user, Date start) {
-        this(user, start, DateUtils.addDays(start, 28));
-    }
-
-    public Period(String user, Date start, Date end) {
-        if (user == null || start == null || end == null) {
+        if (user == null || start == null) {
             throw new IllegalArgumentException();
         }
         this.user = user;
         this.start = start;
-        this.end = end;
+    }
+
+    public Date end() {
+        List<Period> next = all().filter("user", user).filter("start>", start).order("start").fetch(1);
+        if (next.size() > 0) return DateUtils.addDays(next.get(0).start, -1);
+        Date today = new Date();
+        Date result = DateUtils.addDays(start, DEFAULT_LENGTH - 1);
+        // Always give a few more days to allow for periods longer than 28 days
+        if (Lib.daysDifference(result, today) < 3 && Lib.daysDifference(result, today) > -3) {
+            result = DateUtils.addDays(today, 3);
+        }
+        return result;
     }
 
     public long length() {
-        return Lib.daysDifference(start, end);
+        return Lib.daysDifference(start, end());
     }
 
     public List<Day> days() {
-        List<Day> days = Day.between(user, start, end);
+        List<Day> days = Day.between(user, start, end());
         if (days.size() == 0) {
             for (int i = 0; i < length(); i++) {
                 new Day(user, DateUtils.addDays(start, i)).insert();
@@ -58,7 +66,7 @@ public class Period extends Model {
         } else {
             return days;
         }
-        return Day.between(user, start, end);
+        return Day.between(user, start, end());
     }
 
     public static Query<Period> all() {

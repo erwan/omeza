@@ -68,7 +68,7 @@ function confirmDelete(periodId) {
 #{list periods, as:'period'}
       <tr id="periodTR${period.id}">
         <td><a href="@{Application.period(period.id)}">${period.start.format(m('dateformat'))}</a></td>
-        <td>${period.end.format(m('dateformat'))}</td>
+        <td>${period.end().format(m('dateformat'))}</td>
         <td>${period.length()}</td>
         <td><button onclick="confirmDelete(${period.id})">Delete</button></td>
       </tr>

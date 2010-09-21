@@ -73,7 +73,8 @@ ${day.date.format(m('dateformat'))}
 
 <script>
 var editURL = "@{Periods.edit()}";
-var jsonURL = "@{Periods.json(period.id)}";
+var jsonURL = #{if period}"@{Periods.json(period.id)}"#{/}#{else}null#{/};
+
 $(function(){
     Periods.init();
 });
