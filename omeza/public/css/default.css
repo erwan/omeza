@@ -1,22 +1,60 @@
-  a{ text-decoration: none;}
+a { text-decoration: none;}
 
-  body {
-    padding-top: 10px;
-  }
+body {
+    padding: 0;
+    margin: 0;
+}
 
-  #menu-bar {
+#menu-bar {
     font-size: 0.8em;
+    background: #ffc;
+    border-bottom: solid 1px #cc9933;
+    font-family: Verdana, sans-serif;
+    width: 100%;
+    text-align: right;
+}
+
+#menu-bar .menu-item {
+  padding: 0 5px 0 5px;
+}
+
+#container {
+  padding: 10px 20px 10px 20px;
+}
+
+#application-menu {
+    font-size: 0.8em;
+    float:left;
+}
+
+h1 {
+  font-family: 'Tangerine', arial, serif;
+  font-weight: normal;
+  font-size: 36pt;
+  background-color: #cc9933;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  margin: 0;
+  -webkit-border-top-left-radius: 7px;
+  -webkit-border-top-right-radius: 7px;
+  -moz-border-radius-topleft: 7px;
+  -moz-border-radius-topright: 7px;
+}
+
+.items {
     background: #ffc;
     border: solid 2px #cc9933;
     padding: 10px;
     font-family: Verdana, sans-serif; 
     width: 130px;
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    border-radius: 7px;
-  }
+    -webkit-border-bottom-left-radius: 7px;
+    -webkit-border-bottom-right-radius: 7px;
+    -moz-border-radius-bottomleft: 7px;
+    -moz-border-radius-bottomright: 7px;
+}
 
-.menu-item {
+#application-menu .menu-item {
   display: block;
   width: 100%;
   margin: 0;
@@ -27,53 +65,49 @@
   padding: 5px;
 }
 
-.menu-item:hover {
+#application-menu .menu-item:hover {
   background: #ffcc99;
 }
 
-  .current {
-    background:#fc9;
-    border-bottom: 2px solid #fff;
-    text-align: center;
-    font-family: Verdana, sans-serif;
-    padding: 5px;
-  }
+#main-content {
+  margin-left: 160px;
+}
 
+#newPeriod {
+  padding: 10px 0 10px 25px;
+}
 
-  #main-content {
-    margin-left: 160px;
-  }
+/* The whole header */
+table.bbtcycle {
+  font-family: Verdana, sans-serif;
+  margin-left: 25px;
+}
 
-  /* The whole header */
-  table.bbtcycle {
-    font-family: Verdana, sans-serif;
-  }
+.bbtcycle th{
+  background-color: #fc9;
+  border: 2px #c93 solid; border-bottom: 3px #c93;
+  border-collapse: collapse;
+  border-style: solid dashed;
+  border-width: 1px;
+  border-color: #c93;
+  padding: 0.3em;
+  font-size:80%;
+}
 
-  .bbtcycle th{
-    background-color: #fc9;
-    border: 2px #c93 solid; border-bottom: 3px #c93;
-    border-collapse: collapse;
-    border-style: solid dashed;
-    border-width: 1px;
-    border-color: #c93;
-    padding: 0.3em;
-    font-size:80%;
-  }
+.bbtcycle {border: 2px #c93 solid; border-collapse: collapse; font-family: Verdana,sans-serif;}
 
-  .bbtcycle {border: 2px #c93 solid; border-collapse: collapse; font-family: Verdana,sans-serif;}
+/* cells */
+.bbtcycle td{ border-style:/*横ー縦*/ solid dashed; border-color: #c93; border-width: 1px; padding: 0.3em; font-size: 80%;}
 
-  /* cells */
-  .bbtcycle td{ border-style:/*横ー縦*/ solid dashed; border-color: #c93; border-width: 1px; padding: 0.3em; font-size: 80%;}
+/* date cells */
+.bbtcycle td.date{ background-color: #ffc; font-weight: bold; font-size: 80%;}
 
-  /* date cells */
-  .bbtcycle td.date{ background-color: #ffc; font-weight: bold; font-size: 80%;}
+/* date cell for today */
+.bbtcycle tr.date-today { background-color: #fdd; }
+.bbtcycle tr.date-today td.date{ background-color: #fdd; }
 
-  /* date cell for today */
-  .bbtcycle tr.date-today { background-color: #fdd; }
-  .bbtcycle tr.date-today td.date{ background-color: #fdd; }
-
-  /* cells that should be centered */
-  .bbtcycle td.centerlize{ text-align: center;}
+/* cells that should be centered */
+.bbtcycle td.centerlize{ text-align: center;}
 
 .bigmessage {
   color: rgb(68, 68, 68);

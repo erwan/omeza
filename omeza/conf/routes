@@ -5,6 +5,10 @@
 # Home page
 GET     /                                       Application.index
 
+POST    /_ah/xmpp/message/chat/                 Jabber.receive
+
+GET     /favicon.ico                            Application.favicon
+
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 

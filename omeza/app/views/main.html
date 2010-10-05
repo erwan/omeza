@@ -3,7 +3,9 @@
 <head>
 <title>#{get 'title' /}</title>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/humanity/jquery-ui.css" type="text/css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Tangerine&subset=latin' rel='stylesheet' type='text/css'>
 <link href="/public/css/default.css" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" href="@{'/public/images/favicon.gif'}">
 #{get 'styles' /}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
@@ -13,20 +15,29 @@
 </head>
 
 <body>
-<div id="menu-bar" style="float: left;">
-#{if user}
-<div style="padding:5px; color: #f93; font-weight: bold;">&{'welcome', user.nickname}</div>
-#{/}
+
+<div id="menu-bar">
+<div id="toplinks">
+<span class="username">${user.nickname}</span>|
+<span><a href="@{Application.logout()}">&{'logout'}</a></span>
+</div>
+</div>
+
+<div id="container">
+
+<div id="application-menu">
+<h1>Omeza</h1>
+<div class="items">
 <a class="menu-item" href="@{Application.index}">&{'currentPeriod'}</a>
 <a class="menu-item" href="/compare">&{'compare'}</a>
 <a class="menu-item" href="@{Application.archive}">&{'archive'}</a>
 <a class="menu-item">&{'print'}</a>
-<br>
-<div style="text-align: right;" ><font size=2><a href="@{Application.logout()}">&{'logout'}</a></font></div>
+</div>
 </div>
 
 <div id="main-content">
 #{doLayout /}
+</div>
 </div>
 
 </body>

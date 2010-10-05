@@ -44,6 +44,20 @@ Periods.chart = function() {
                     result.temperature[i][1] = null;
                 }
             }
+            for (var i = 0; i < result.blood.length; i++) {
+                if (result.blood[i][1] === 0) {
+                    result.blood[i][1] = 30;
+                } else {
+                    result.blood[i][1] = 35.5 + (result.blood[i][1] * 0.2);
+                }
+            }
+            for (var i = 0; i < result.mucus.length; i++) {
+                if (result.mucus[i][1] === 0) {
+                    result.mucus[i][1] = 30;
+                } else {
+                    result.mucus[i][1] = 35.5 + (result.mucus[i][1] * 0.2);
+                }
+            }
             var plot = $.plot($("#chart"),
                 [
                     {
@@ -59,7 +73,20 @@ Periods.chart = function() {
                     },
                     { // Just to get the legend!
                         label: i18n["special"],
-                        data: []
+                        data: [],
+                        color: "#afd8f8"
+                    },
+                    {
+                        label: i18n["blood"],
+                        lines: { show: true, fill: true },
+                        data: result.blood,
+                        color: "#FF0000"
+                    },
+                    {
+                        label: i18n["mucus"],
+                        lines: { show: true, fill: true },
+                        data: result.mucus,
+                        color: "#FFFF00"
                     }
                 ],
                 {
@@ -75,12 +102,12 @@ Periods.chart = function() {
             );
             for (var i = 0; i < result.sex.length; i++) {
                 var day = result.sex[i];
-                var y = result.temperature[day-1][1] ? result.temperature[day-1][1] : 37;
+                var y = result.temperature[day][1] ? result.temperature[day][1] : 37;
                 Periods.triangleDown(plot, day, y, "FFB5D7");
             }
             for (var i = 0; i < result.special.length; i++) {
                 var day = result.special[i];
-                var y = result.temperature[day-1][1] ? result.temperature[day-1][1] : 37;
+                var y = result.temperature[day][1] ? result.temperature[day][1] : 37;
                 Periods.triangleUp(plot, day, y, "afd8f8");
             }
         }

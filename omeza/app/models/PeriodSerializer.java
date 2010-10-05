@@ -19,11 +19,12 @@ public class PeriodSerializer implements JsonSerializer<Period> {
         JsonArray temperature = new JsonArray();
         JsonArray sex = new JsonArray();
         JsonArray special = new JsonArray();
-        int i = 1;
+        JsonArray mucus = new JsonArray();
+        JsonArray blood = new JsonArray();
+        int i = 0;
         for (Day day: period.days()) {
-            JsonArray tday = new JsonArray();
-
             // Temperature
+            JsonArray tday = new JsonArray();
             tday.add(new JsonPrimitive(i));
             if (day.temperature == null) {
                 tday.add(new JsonNull());
@@ -32,6 +33,18 @@ public class PeriodSerializer implements JsonSerializer<Period> {
                 tday.add(new JsonPrimitive(bd));
             }
             temperature.add(tday);
+
+            // Mucus
+            JsonArray mday = new JsonArray();
+            mday.add(new JsonPrimitive(i));
+            mday.add(new JsonPrimitive(day.mucus == null ? 0 : day.mucus));
+            mucus.add(mday);
+
+            // Blood
+            JsonArray bday = new JsonArray();
+            bday.add(new JsonPrimitive(i));
+            bday.add(new JsonPrimitive(day.blood == null ? 0 : day.blood));
+            blood.add(bday);
 
             // Sex
             if (day.sex != null && !"".equals(day.sex)) {
@@ -48,6 +61,8 @@ public class PeriodSerializer implements JsonSerializer<Period> {
         result.add("temperature", temperature);
         result.add("sex", sex);
         result.add("special", special);
+        result.add("mucus", mucus);
+        result.add("blood", blood);
         return result;
     }
 

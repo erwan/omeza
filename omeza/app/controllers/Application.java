@@ -7,6 +7,7 @@ import play.Play;
 import play.Play.Mode;
 import play.i18n.Lang;
 import play.i18n.Messages;
+import play.libs.WS;
 import play.modules.gae.GAE;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -44,6 +45,11 @@ public class Application extends Controller {
 
     public static void login() {
         GAE.login("Application.index");
+    }
+
+    public static void favicon() {
+        response.contentType = "image/x-icon";
+        renderBinary(Play.getFile("/public/images/favicon.gif"));
     }
 
     @SuppressWarnings("unused")

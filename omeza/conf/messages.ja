@@ -22,3 +22,5 @@ archive.start=開始日
 archive.end=終了日
 archive.length=周期
 archive.delete=削除
+
+xmpp.help=本日の体温はチャットで設定出来ます。例：「36.6」、「yesterday 35.5」
