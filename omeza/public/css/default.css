@@ -30,11 +30,12 @@ body {
 h1 {
   font-family: 'Tangerine', arial, serif;
   font-weight: normal;
-  font-size: 36pt;
+  line-height: 0.8em;
+  font-size: 30pt;
   background-color: #cc9933;
   color: white;
   text-align: center;
-  padding-top: 5px;
+  padding: 0;
   margin: 0;
   -webkit-border-top-left-radius: 7px;
   -webkit-border-top-right-radius: 7px;
