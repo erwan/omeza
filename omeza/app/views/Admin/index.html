@@ -1,0 +1,27 @@
+#{extends 'main.html' /}
+#{set title:'Omeza - Home' /}
+
+%{ m = play.i18n.Messages.&get }%
+
+#{set 'styles'}
+#{/}
+
+ADMIN!
+
+<ul>
+#{list users}
+<li><a href="@{Admin.assume(_)}">_</a>
+#{/}
+</ul>
+
+#{set 'scripts'}
+<!--[if IE]><script language="javascript" type="text/javascript" src="/public/js/flot/excanvas.pack.js"></script><![endif]-->
+<script src="/public/js/flot/jquery.flot.min.js"></script>
+<script src="/public/js/periods.js"></script>
+<script src="/public/js/jquery.jeditable.mini.js"></script>
+<script>
+$(function(){
+});
+</script>
+
+#{/}

@@ -13,7 +13,7 @@ import siena.Model;
 import siena.Query;
 import utils.Lib;
 
-public class Period extends Model {
+public class Period extends siena.Model { // TODO: See why no crud implements play.db.Model {
     @Id
     public Long id;
 
@@ -81,9 +81,32 @@ public class Period extends Model {
         return all().filter("user", user).fetch();
     }
 
+    public static Set<String> allUsers() {
+        Set<String> result = new HashSet<String>();
+        for (Period p: all().fetch()) {
+            result.add(p.user);
+        }
+        return result;
+    }
+
     public static Period lastPeriodFor(String user) {
         List<Period> result = all().filter("user", user).order("-start").fetch(1);
         return result.size() > 0 ? result.get(0) : null;
+    }
+
+//    @Override
+    public Object _key() {
+        return id;
+    }
+
+//    @Override
+    public void _save() {
+        update();
+    }
+
+//    @Override
+    public void _delete() {
+        delete();
     }
 
 }

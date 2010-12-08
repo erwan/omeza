@@ -1,19 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'Omeza - Home' /}
 
-#{set 'scripts'}
-<!--[if IE]><script language="javascript" type="text/javascript" src="/public/js/flot/excanvas.pack.js"></script><![endif]-->
-<script src="/public/js/flot/jquery.flot.min.js"></script>
-<script src="/public/js/periods.js"></script>
-<script src="/public/js/jquery.jeditable.mini.js"></script>
-#{/}
+
 %{ m = play.i18n.Messages.&get }%
 
 #{set 'styles'}
 #{/}
 
 <div id="graph" hidden="false">
-<div id="chart" class="chart" style="width: 700px; height: 270px; "></div>
+<div id="graphHide" class="open">show/hide graph</div>
+<div id="chart" class="chart" style="width: 780px; height: 270px; "></div>
 </div>
 
 <form id="newPeriod" action="@{Periods.create()}">
@@ -52,7 +48,7 @@ ${day.date.format(m('dateformat'))}
 <td class="centerlize" width="35px">
     <div id="special-${day.id}" class="inplace">${day.special}</div>
 </td>
-<!--MEMO--><td width="300px">
+<!--MEMO--><td width="360px">
     <div id="memo-${day.id}" class="inplace">${day.memo}</div>
 </td>
 <!--粘液--><td class="centerlize"  width="35px">
@@ -71,6 +67,11 @@ ${day.date.format(m('dateformat'))}
 <div class="bigmessage">No period! Create one to get started.</div>
 #{/else}
 
+#{set 'scripts'}
+<!--[if IE]><script language="javascript" type="text/javascript" src="/public/js/flot/excanvas.pack.js"></script><![endif]-->
+<script src="/public/js/flot/jquery.flot.min.js"></script>
+<script src="/public/js/periods.js"></script>
+<script src="/public/js/jquery.jeditable.mini.js"></script>
 <script>
 var editURL = "@{Periods.edit()}";
 var jsonURL = #{if period}"@{Periods.json(period.id)}"#{/}#{else}null#{/};
@@ -79,3 +80,4 @@ $(function(){
     Periods.init();
 });
 </script>
+#{/}

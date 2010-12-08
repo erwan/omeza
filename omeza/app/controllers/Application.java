@@ -7,7 +7,6 @@ import play.Play;
 import play.Play.Mode;
 import play.i18n.Lang;
 import play.i18n.Messages;
-import play.libs.WS;
 import play.modules.gae.GAE;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -52,11 +51,11 @@ public class Application extends Controller {
         renderBinary(Play.getFile("/public/images/favicon.gif"));
     }
 
-    @SuppressWarnings("unused")
     @Before(unless={"login", "logout"})
-    private static void auth() {
+    static void auth() {
         if (!GAE.isLoggedIn()) login();
         renderArgs.put("user", GAE.getUser());
+        renderArgs.put("admin", GAE.isAdmin());
     }
 
     private static String getEmail() {

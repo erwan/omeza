@@ -2,6 +2,9 @@ Periods = {};
 
 Periods.init = function() {
     $("#date-field").datepicker({ dateFormat: 'yy-mm-dd'});
+    $("#graphHide").click(function(){
+        $("#chart").slideToggle(500);
+    });
     $(".inplace").editable(editURL, {
         tooltip: 'Click to edit',
         placeholder: '&nbsp;',

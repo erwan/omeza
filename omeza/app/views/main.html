@@ -3,30 +3,32 @@
 <head>
 <title>#{get 'title' /}</title>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/humanity/jquery-ui.css" type="text/css" rel="stylesheet" />
-<link href='http://fonts.googleapis.com/css?family=Tangerine&subset=latin' rel='stylesheet' type='text/css'>
-<link href="/public/css/default.css" type="text/css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Cuprum' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="@{'/public/css/960/reset.css'}" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="@{'/public/css/960/text.css'}" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="@{'/public/css/960/960.css'}" type="text/css" media="screen, projection">
+<link href="@{'/public/css/default.css'}" type="text/css" rel="stylesheet" />
 <link rel="shortcut icon" href="@{'/public/images/favicon.gif'}">
 #{get 'styles' /}
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
-<script src="@{Application.i18n()}"></script>
-#{get 'scripts' /}
 #{analytics /}
 </head>
 
 <body>
 
-<div id="menu-bar">
+<div id="header">
 <div id="toplinks">
 <span class="username">${user.nickname}</span>|
+#{if admin}
+<span class="admin"><a href="@{Admin.index()}">admin panel</a></span>|
+#{/}
 <span><a href="@{Application.logout()}">&{'logout'}</a></span>
 </div>
 </div>
 
-<div id="container">
+<div id="content" class="container_12">
 
-<div id="application-menu">
-<h1>omeza</h1>
+<div id="application-menu" class="grid_2 ">
+<h1>Omeza</h1>
 <div class="items">
 <a class="menu-item" href="@{Application.index}">&{'currentPeriod'}</a>
 <a class="menu-item" href="/compare">&{'compare'}</a>
@@ -35,10 +37,20 @@
 </div>
 </div>
 
-<div id="main-content">
+<div id="" class="grid_10 ">
 #{doLayout /}
 </div>
+
 </div>
+
+<div id="footer" class="container_12">
+©Omeza.org
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+<script src="@{Application.i18n()}"></script>
+#{get 'scripts' /}
 
 </body>
 </html>
