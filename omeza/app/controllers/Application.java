@@ -27,6 +27,11 @@ public class Application extends Controller {
         renderText("var i18n = " + new Gson().toJson(Messages.all(Lang.get())));
     }
 
+    public static void lang(String locale) {
+        Lang.change(locale);
+        index();
+    }
+
     public static void period(Long periodId) {
         Period period = Period.findById(periodId);
         notFoundIfNull(period);

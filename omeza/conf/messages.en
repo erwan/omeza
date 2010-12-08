@@ -1,0 +1,27 @@
+dateformat=MM'/'dd'/'yyyy
+admin=admin
+
+welcome=Welcome, %s
+currentPeriod=Current
+compare=Compare
+archive=Archive
+print=Print
+logout=logout
+
+newPeriod=New period from:
+
+date=date
+dayno=day #
+temperature=temp
+sex=sex
+special=spe
+memo=MEMO
+mucus=mucus
+blood=blood
+
+archive.start=start
+archive.end=end
+archive.length=length
+archive.delete=delete
+
+xmpp.help=You can input the day temperature, ex: "36.6" or "yesterday 35.5"

@@ -1,4 +1,5 @@
 dateformat=yyyy'/'MM'/'dd
+admin=管理
 
 welcome=ようこそ%sさん
 currentPeriod=現在の周期

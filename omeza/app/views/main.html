@@ -18,8 +18,14 @@
 <div id="header">
 <div id="toplinks">
 <span class="username">${user.nickname}</span>|
+#{if lang == "en"}
+<span><a href="@{Application.lang("ja")}">ja</a></span>|
+#{/if}
+#{else}
+<span><a href="@{Application.lang("en")}">en</a></span>|
+#{/else}
 #{if admin}
-<span class="admin"><a href="@{Admin.index()}">admin panel</a></span>|
+<span class="admin"><a href="@{Admin.index()}">&{'admin'}</a></span>|
 #{/}
 <span><a href="@{Application.logout()}">&{'logout'}</a></span>
 </div>
