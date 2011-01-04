@@ -77,8 +77,8 @@ function confirmDelete(periodId) {
     <tbody>
 </table>
 
-<a href="@{Application.longGraph(year.first().start, year.last().start)}">Long graph</a>
-<a href="@{Application.longData(year.first().start, year.last().start)}">Long data</a>
+<a href="@{Application.longGraph(year.first().start, year.last().end())}">Long graph</a>
+<a href="@{Application.longData(year.first().start, year.last().end())}">Long data</a>
 
 <br/>
 

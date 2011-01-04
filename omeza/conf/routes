@@ -9,7 +9,7 @@ POST    /_ah/xmpp/message/chat/                 Jabber.receive
 
 GET     /favicon.ico                            Application.favicon
 
-GET     /periods/{periodId}                     Application.period
+GET     /periods/{<[0-9]+>periodId}                     Application.period
 
 GET     /archive                                Application.archive
 

@@ -13,7 +13,8 @@
 </div>
 
 <form id="newPeriod" action="@{Periods.create()}">
-&{'newPeriod'}<input name="start" id="date-field"> <input type="submit" value="Start">
+&{'newPeriod'}<input name="start" id="date-field" value="${new Date().format("yyyy'-'MM'-'dd")}">
+<input type="submit" value="Start">
 </form>
 
 #{if period}
