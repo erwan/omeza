@@ -9,6 +9,10 @@ POST    /_ah/xmpp/message/chat/                 Jabber.receive
 
 GET     /favicon.ico                            Application.favicon
 
+GET     /periods/{periodId}                     Application.period
+
+GET     /archive                                Application.archive
+
 *       /admin                                  module:crud
 
 # Map static resources from the /app/public folder to the /public path

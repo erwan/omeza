@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -94,6 +95,20 @@ public class Period extends siena.Model { // TODO: See why no crud implements pl
         return result.size() > 0 ? result.get(0) : null;
     }
 
+    public static List<Year> allByYear(String user) {
+        List<Period> periods = Period.all().filter("user", user).order("-start").fetch();
+        List<Year> result = new ArrayList<Year>();
+        Year year = null;
+        for (Period p: periods) {
+            if (year == null || Lib.getYear(p.start) != year.year) {
+                year = new Year(Lib.getYear(p.start));
+                result.add(year);
+            }
+            year.periods.add(p);
+        }
+        return result;
+    }
+
 //    @Override
     public Object _key() {
         return id;
@@ -107,6 +122,21 @@ public class Period extends siena.Model { // TODO: See why no crud implements pl
 //    @Override
     public void _delete() {
         delete();
+    }
+
+    public static class Year {
+        public int year;
+        public List<Period> periods;
+        public Year(int year) {
+            this.year = year;
+            this.periods = new ArrayList<Period>();
+        }
+        public Period first() {
+            return this.periods.get(0);
+        }
+        public Period last() {
+            return this.periods.get(this.periods.size() - 1);
+        }
     }
 
 }

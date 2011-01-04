@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import models.Period;
@@ -39,8 +40,16 @@ public class Application extends Controller {
     }
 
     public static void archive() {
-        List<Period> periods = Period.all().filter("user", getEmail()).order("-start").fetch();
+        List<Period.Year> periods = Period.allByYear(getEmail());
         render(periods);
+    }
+
+    public static void longGraph(Date start, Date stop) {
+        ok();
+    }
+
+    public static void longData(Date start, Date stop) {
+        ok();
     }
 
     public static void logout() {
