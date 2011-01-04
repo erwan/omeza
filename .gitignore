@@ -6,4 +6,5 @@ compiler.jar
 eclipse
 .settings
 tmp/
+precompiled/
 appengine-generated

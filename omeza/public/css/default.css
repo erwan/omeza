@@ -42,7 +42,8 @@ h1 {
 .items {
     background: #ffc;
     border: solid 2px #cc9933;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-family: Verdana, sans-serif; 
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
@@ -52,7 +53,6 @@ h1 {
 
 #application-menu .menu-item {
   display: block;
-  width: 100%;
   margin: 0;
   background:#ffc;
   border-bottom: 2px solid #fff;
