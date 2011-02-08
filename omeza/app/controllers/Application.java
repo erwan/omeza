@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import models.Period;
+import models.User;
+import play.Logger;
 import play.Play;
 import play.Play.Mode;
 import play.i18n.Lang;
@@ -30,6 +32,9 @@ public class Application extends Controller {
 
     public static void lang(String locale) {
         Lang.change(locale);
+        User user = getUser();
+        user.locale = locale;
+        user.update();
         index();
     }
 
@@ -70,10 +75,19 @@ public class Application extends Controller {
         if (!GAE.isLoggedIn()) login();
         renderArgs.put("user", GAE.getUser());
         renderArgs.put("admin", GAE.isAdmin());
+        User user = getUser();
+        if (user.locale != null) {
+            Logger.info("We need to switch locale: " + user.locale);
+            Lang.change(user.locale);
+        }
     }
 
     private static String getEmail() {
         return GAE.isLoggedIn() ? GAE.getUser().getEmail() : null;
+    }
+
+    private static User getUser() {
+        return User.findOrCreate(getEmail());
     }
 
 }
