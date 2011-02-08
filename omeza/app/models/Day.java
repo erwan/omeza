@@ -1,9 +1,13 @@
 package models;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.time.DateUtils;
+
+import play.Logger;
 import siena.Id;
 import siena.Model;
 import siena.Query;
@@ -24,6 +28,10 @@ public class Day extends Model {
     public Day(String user, Date date) {
         this.user = user;
         this.date = date;
+    }
+
+    public boolean today() {
+        return DateUtils.isSameDay(this.date, new Date());
     }
 
     public static Query<Day> all() {

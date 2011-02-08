@@ -95,8 +95,8 @@ table.bbtcycle {
 .bbtcycle td.date{ background-color: #ffc; font-weight: bold; font-size: 80%;}
 
 /* date cell for today */
-.bbtcycle tr.date-today { background-color: #fdd; }
-.bbtcycle tr.date-today td.date{ background-color: #fdd; }
+.bbtcycle tr.today { background-color: #fdd; }
+.bbtcycle tr.today td.date{ background-color: #fdd; }
 
 /* cells that should be centered */
 .bbtcycle td.centerlize{ text-align: center;}
@@ -118,3 +118,4 @@ table.bbtcycle {
     color: #999;
     padding-bottom: 20px;
 }
+

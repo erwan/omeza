@@ -33,8 +33,9 @@
 </thead>
 
 {% c = 1 %}
+
 #{list period.days(), as:'day'}
-<tr #{if day.date == today}class="today"#{/} >
+<tr #{if (day.today())}class="today"#{/} >
 
 <td class="date" width="100px">
 ${day.date.format(m('dateformat'))}
