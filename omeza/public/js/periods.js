@@ -106,12 +106,12 @@ Periods.chart = function() {
             for (var i = 0; i < result.sex.length; i++) {
                 var day = result.sex[i];
                 var y = result.temperature[day][1] ? result.temperature[day][1] : 37;
-                Periods.triangleDown(plot, day, y, "FFB5D7");
+                Periods.triangleDown(plot, day, y, "#FFB5D7");
             }
             for (var i = 0; i < result.special.length; i++) {
                 var day = result.special[i];
                 var y = result.temperature[day][1] ? result.temperature[day][1] : 37;
-                Periods.triangleUp(plot, day, y, "afd8f8");
+                Periods.triangleUp(plot, day, y, "#afd8f8");
             }
         }
     );
