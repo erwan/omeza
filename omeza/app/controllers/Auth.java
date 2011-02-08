@@ -9,14 +9,21 @@ import play.mvc.Controller;
 
 public class Auth extends Controller {
 
-    @Before(unless={"login", "logout"})
+    @Before
+    static void domainFix() {
+        if (request.domain.contains("appspot.com")) {
+            redirect("http://www.omeza.org" + request.path);
+        }
+    }
+
+    @Before(unless={"login", "logout", "Application.welcome"})
     static void auth() {
+//        if (!GAE.isLoggedIn()) Application.welcome();
         if (!GAE.isLoggedIn()) login();
         renderArgs.put("user", GAE.getUser());
         renderArgs.put("admin", GAE.isAdmin());
         User user = getUser();
         if (user.locale != null) {
-            Logger.info("We need to switch locale: " + user.locale);
             Lang.change(user.locale);
         }
     }

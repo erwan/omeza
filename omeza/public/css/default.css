@@ -23,6 +23,12 @@ a { text-decoration: none;}
 
 h1 {
   font-family: 'Cuprum', arial, sans, sans-serif;
+  font-size: 24pt;
+  text-align: center;
+}
+
+#application-menu > h2 {
+  font-family: 'Cuprum', arial, sans, sans-serif;
   font-weight: normal;
   line-height: 1.4em;
   font-size: 18pt;

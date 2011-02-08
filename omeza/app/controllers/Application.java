@@ -22,6 +22,10 @@ public class Application extends Controller {
         render(period);
     }
 
+    public static void welcome() {
+        render();
+    }
+
     public static void i18n() {
         response.contentType = "application/javascript";
         if (Play.mode == Mode.PROD) response.cacheFor("3h");

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>#{get 'title' /}</title>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/humanity/jquery-ui.css" type="text/css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Cuprum' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="@{'/public/css/960/reset.css'}" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="@{'/public/css/960/text.css'}" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="@{'/public/css/960/960.css'}" type="text/css" media="screen, projection">
+<link href="@{'/public/css/default.css'}" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" href="@{'/public/images/favicon.gif'}">
+<style>
+#main {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    background-color: #ffc;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    padding: 10px 20px;
+    border: 1px solid #c93;
+    -moz-box-shadow: 0 0 10px #888;
+    -webkit-box-shadow: 0 0 20px #888;
+    box-shadow: 0 0 20px #888;
+}
+#login {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E2B868), to(#cc9933));
+    background-image: -moz-linear-gradient(top, #E2B868 0%, #cc9933);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 22px;
+    display: block;
+    padding: 5px 15px 5px 15px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+#sublogin {
+    text-align: center;
+    font-style: italic;
+}
+#footer {
+    margin-top: 50px;
+}
+</style>
+#{analytics /}
+</head>
+
+<body>
+<div id="main">
+
+<h1>Welcome to Omeza.org</h1>
+
+<p>Are you trying to get pregnant, or looking for a natural way of contraception?</p>
+
+<p>Omeza.org is your tool for monitoring your Basal Body Temperature and your
+menstrual cycle. The goal is to know better your body to estimate your days
+of fertility; this can be used to increase your chances of getting pregnant.<p>
+
+<div style="text-align: center">
+<img src="@{'/public/images/preview.png'}">
+</div>
+
+<h3>What is Basal Body Temperature?</h3>
+
+<p><a href="http://en.wikipedia.org/wiki/Basal_body_temperature">Basal body temperature</a>
+is the temperature measured on morning, right after waking up. Ovulation can cause
+an increase of one quarter to one half degree celcius of temperature, so measuring
+your temperature every day can help you detect ovulation thus fertility time.</p>
+
+<h3>What do I need to track my basal body temperature?</h3>
+
+<p>Classical thermometers are not sensitive enough to measure BBT. You need a
+<i>basal thermometer</i>: those are accurate to 0.05C or 0.1F, which is necessary
+for BBT measurements.
+
+<h3>Get started!</h3>
+Get started right now! If you don't have a basal thermometer yet, you can still
+record other informations related to your cycle in Omeza.org.
+<a href="@{Auth.login()}" id="login">Login with Google</a>
+
+#{set 'scripts'}
+<script>
+$(function(){
+});
+</script>
+#{/}
+
+<div id="footer" class="container_12">
+©Omeza.org
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+<script src="@{Application.i18n()}"></script>
+#{get 'scripts' /}
+
+</div> <!-- main -->
+</body>
+</html>

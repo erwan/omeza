@@ -33,8 +33,9 @@
 
 <div id="content" class="container_12">
 
+#{get 'sidebar'}
 <div id="application-menu" class="grid_2 ">
-<h1>Omeza</h1>
+<h2>Omeza</h2>
 <div class="items">
 <a class="menu-item" href="@{Application.index}">&{'currentPeriod'}</a>
 <!-- a class="menu-item" href="/compare">&{'compare'}</a -->
@@ -42,6 +43,7 @@
 <a class="menu-item">&{'print'}</a>
 </div>
 </div>
+#{/get}
 
 <div id="" class="grid_10 ">
 #{doLayout /}

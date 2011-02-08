@@ -4,12 +4,16 @@
 
 # Home page
 GET     /                                       Application.index
+GET     /welcome                                Application.welcome
 GET     /favicon.ico                            Application.favicon
 POST    /periods/new                            Periods.create
 GET     /periods/{<[0-9]+>periodId}             Application.period
 GET     /periods/{<[0-9]+>periodId}/json        Periods.json
 POST    /periods/edit                           Periods.edit
 GET     /archive                                Application.archive
+
+# Admin
+GET     /admin                                  Admin.index
 
 # Auth
 GET     /login                                  Auth.login
