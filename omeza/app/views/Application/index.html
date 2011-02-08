@@ -12,10 +12,10 @@
 <div id="chart" class="chart" style="width: 780px; height: 270px; "></div>
 </div>
 
-<form id="newPeriod" action="@{Periods.create()}">
+#{form @Periods.create(), id: "newPeriod"}
 &{'newPeriod'}<input name="start" id="date-field" value="${new Date().format("yyyy'-'MM'-'dd")}">
 <input type="submit" value="Start">
-</form>
+#{/form}
 
 #{if period}
 <div style="margin:0px">

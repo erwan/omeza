@@ -4,19 +4,20 @@
 
 # Home page
 GET     /                                       Application.index
-
-POST    /_ah/xmpp/message/chat/                 Jabber.receive
-
 GET     /favicon.ico                            Application.favicon
-
-GET     /periods/{<[0-9]+>periodId}                     Application.period
-
+POST    /periods/new                            Periods.create
+GET     /periods/{<[0-9]+>periodId}             Application.period
+GET     /periods/{<[0-9]+>periodId}/json        Periods.json
+POST    /periods/edit                           Periods.edit
 GET     /archive                                Application.archive
 
-*       /admin                                  module:crud
+# Auth
+GET     /login                                  Auth.login
+GET     /logout                                 Auth.logout
+GET     /i18n.js                                Application.i18n
+
+# Config
+GET     /config/lang                           Application.lang
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
-
-# Catch all
-*       /{controller}/{action}                  {controller}.{action}

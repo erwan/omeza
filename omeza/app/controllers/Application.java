@@ -5,22 +5,20 @@ import java.util.List;
 
 import models.Period;
 import models.User;
-import play.Logger;
 import play.Play;
 import play.Play.Mode;
 import play.i18n.Lang;
 import play.i18n.Messages;
-import play.modules.gae.GAE;
-import play.mvc.Before;
 import play.mvc.Controller;
+import play.mvc.With;
 
 import com.google.gson.Gson;
 
-
+@With(Auth.class)
 public class Application extends Controller {
 
     public static void index() {
-        Period period = Period.lastPeriodFor(getEmail());
+        Period period = Period.lastPeriodFor(Auth.getEmail());
         render(period);
     }
 
@@ -32,7 +30,7 @@ public class Application extends Controller {
 
     public static void lang(String locale) {
         Lang.change(locale);
-        User user = getUser();
+        User user = Auth.getUser();
         user.locale = locale;
         user.update();
         index();
@@ -45,7 +43,7 @@ public class Application extends Controller {
     }
 
     public static void archive() {
-        List<Period.Year> periods = Period.allByYear(getEmail());
+        List<Period.Year> periods = Period.allByYear(Auth.getEmail());
         render(periods);
     }
 
@@ -57,37 +55,9 @@ public class Application extends Controller {
         ok();
     }
 
-    public static void logout() {
-        GAE.logout("Application.index");
-    }
-
-    public static void login() {
-        GAE.login("Application.index");
-    }
-
     public static void favicon() {
         response.contentType = "image/x-icon";
         renderBinary(Play.getFile("/public/images/favicon.gif"));
-    }
-
-    @Before(unless={"login", "logout"})
-    static void auth() {
-        if (!GAE.isLoggedIn()) login();
-        renderArgs.put("user", GAE.getUser());
-        renderArgs.put("admin", GAE.isAdmin());
-        User user = getUser();
-        if (user.locale != null) {
-            Logger.info("We need to switch locale: " + user.locale);
-            Lang.change(user.locale);
-        }
-    }
-
-    private static String getEmail() {
-        return GAE.isLoggedIn() ? GAE.getUser().getEmail() : null;
-    }
-
-    private static User getUser() {
-        return User.findOrCreate(getEmail());
     }
 
 }

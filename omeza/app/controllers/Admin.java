@@ -20,7 +20,7 @@ public class Admin extends Controller {
 
     @Before
     static void check() {
-        if (!GAE.isLoggedIn()) Application.login();
+        if (!GAE.isLoggedIn()) Auth.login();
         if (!GAE.isAdmin()) forbidden();
         renderArgs.put("user", GAE.getUser());
         renderArgs.put("admin", GAE.isAdmin());
