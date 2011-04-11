@@ -10,7 +10,10 @@ POST    /periods/new                            Periods.create
 GET     /periods/{<[0-9]+>periodId}             Application.period
 GET     /periods/{<[0-9]+>periodId}/json        Periods.json
 POST    /periods/edit                           Periods.edit
+POST    /periods/delete                         Periods.delete
 GET     /archive                                Application.archive
+GET     /archive/graph                          Application.longGraph
+GET     /archive/data                           Application.longData
 
 # Admin
 GET     /admin                                  Admin.index
