@@ -8,7 +8,9 @@ Periods.init = function() {
     $(".inplace").editable(editURL, {
         tooltip: 'Click to edit',
         placeholder: '&nbsp;',
-        callback: function(){Periods.chart();}
+        callback: function() {
+            Periods.chart();
+        }
     });
     Periods.chart();
 };
