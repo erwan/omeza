@@ -1,0 +1,163 @@
+* {
+    margin: 0; padding: 0;
+}
+
+.rounded-corners (@radius: 7px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.rounded-top (@radius: 7px) {
+  border-top-left-radius: @radius;
+  border-top-right-radius: @radius;
+  -moz-border-radius-topleft: @radius;
+  -moz-border-radius-topright: @radius;
+}
+
+.rounded-bottom (@radius: 7px) {
+  border-bottom-left-radius: @radius;
+  border-bottom-right-radius: @radius;
+  -moz-border-radius-bottomleft: @radius;
+  -moz-border-radius-bottomright: @radius;
+}
+
+@color1: #cc9933;
+@color2: #ffc;
+
+a { text-decoration: none;}
+
+#header {
+    font-size: 0.8em;
+    background: @color2;
+    border-bottom: solid 1px @color1;
+    font-family: Verdana, sans-serif;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#header .menu-item {
+  padding: 0 5px 0 5px;
+}
+
+#content {
+  margin-top: 10px;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#graphHide {
+    text-align: right;
+}
+
+h1 {
+  font-family: 'Cuprum', arial, sans, sans-serif;
+  font-size: 24pt;
+  text-align: center;
+}
+
+#application-menu {
+  width: 130px;
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#application-menu > h2 {
+  font-family: 'Cuprum', arial, sans, sans-serif;
+  font-weight: normal;
+  line-height: 1.4em;
+  font-size: 18pt;
+  background-color: @color1;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E2B868), to(@color1));
+  background-image: -moz-linear-gradient(top, #E2B868 0%, @color1);
+  color: white;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  .rounded-top
+}
+
+.items {
+    background: @color2;
+    border: solid 2px @color1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Verdana, sans-serif; 
+  .rounded-bottom
+}
+
+#application-menu .menu-item {
+  display: block;
+  margin: 0;
+  background:@color2;
+  border-bottom: 2px solid #fff;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  padding: 5px;
+}
+
+#application-menu .menu-item:hover {
+  background: #ffcc99;
+}
+
+#innercontent {
+    float: right;
+}
+
+#newPeriod {
+  padding: 10px 0 10px 25px;
+}
+
+/* The whole header */
+table.bbtcycle {
+  font-family: Verdana, sans-serif;
+  margin-left: 25px;
+}
+
+.bbtcycle th{
+  background-color: #fc9;
+  border: 2px #c93 solid; border-bottom: 3px #c93;
+  border-collapse: collapse;
+  border-style: solid dashed;
+  border-width: 1px;
+  border-color: #c93;
+  padding: 0.3em;
+  font-size:80%;
+}
+
+.bbtcycle {border: 2px #c93 solid; border-collapse: collapse; font-family: Verdana,sans-serif;}
+
+/* cells */
+.bbtcycle td{ border-style:/*横ー縦*/ solid dashed; border-color: #c93; border-width: 1px; padding: 0.3em; font-size: 80%;}
+
+/* date cells */
+.bbtcycle td.date{ background-color: @color2; font-weight: bold; font-size: 80%;}
+
+/* date cell for today */
+.bbtcycle tr.today { background-color: #fdd; }
+.bbtcycle tr.today td.date{ background-color: #fdd; }
+
+/* cells that should be centered */
+.bbtcycle td.centerlize{ text-align: center;}
+
+.bigmessage {
+  color: rgb(68, 68, 68);
+  text-shadow: white 1px 1px 0;
+  font-family: Helvetica, Arial, Sans;
+  width: 700px;
+  padding-top: 75px;
+  font-size: larger;
+  text-align: center;
+}
+
+.ui-widget { font-size: 0.8em; }
+
+#footer {
+    text-align: center;
+    color: #999;
+    padding-bottom: 20px;
+}
+

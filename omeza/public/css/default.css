@@ -1,40 +1,50 @@
-a { text-decoration: none;}
-
-#header {
-    font-size: 0.8em;
-    background: #ffc;
-    border-bottom: solid 1px #cc9933;
-    font-family: Verdana, sans-serif;
-    text-align: right;
-    padding-right: 10px;
+* {
+  margin: 0;
+  padding: 0;
 }
-
+a {
+  text-decoration: none;
+}
+#header {
+  font-size: 0.8em;
+  background: #ffffcc;
+  border-bottom: solid 1px #cc9933;
+  font-family: Verdana, sans-serif;
+  text-align: right;
+  padding-right: 10px;
+}
 #header .menu-item {
   padding: 0 5px 0 5px;
 }
-
 #content {
   margin-top: 10px;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
 #graphHide {
-    text-align: right;
+  text-align: right;
 }
-
 h1 {
   font-family: 'Cuprum', arial, sans, sans-serif;
   font-size: 24pt;
   text-align: center;
 }
-
+#application-menu {
+  width: 140px;
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 #application-menu > h2 {
   font-family: 'Cuprum', arial, sans, sans-serif;
   font-weight: normal;
   line-height: 1.4em;
   font-size: 18pt;
   background-color: #cc9933;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E2B868), to(#cc9933));
-  background-image: -moz-linear-gradient(top, #E2B868 0%, #cc9933);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e2b868), to(#cc9933));
+  background-image: -moz-linear-gradient(top, #e2b868 0%, #cc9933);
   color: white;
   text-align: center;
   padding: 0;
@@ -44,71 +54,80 @@ h1 {
   -moz-border-radius-topleft: 7px;
   -moz-border-radius-topright: 7px;
 }
-
 .items {
-    background: #ffc;
-    border: solid 2px #cc9933;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-family: Verdana, sans-serif; 
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    -moz-border-radius-bottomleft: 7px;
-    -moz-border-radius-bottomright: 7px;
+  background: #ffffcc;
+  border: solid 2px #cc9933;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: Verdana, sans-serif;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  -moz-border-radius-bottomleft: 7px;
+  -moz-border-radius-bottomright: 7px;
 }
-
 #application-menu .menu-item {
   display: block;
   margin: 0;
-  background:#ffc;
+  background: #ffffcc;
   border-bottom: 2px solid #fff;
   text-align: center;
   font-family: Verdana, sans-serif;
   padding: 5px;
 }
-
 #application-menu .menu-item:hover {
   background: #ffcc99;
 }
-
 #newPeriod {
   padding: 10px 0 10px 25px;
 }
-
 /* The whole header */
 table.bbtcycle {
   font-family: Verdana, sans-serif;
   margin-left: 25px;
 }
-
-.bbtcycle th{
+.bbtcycle th {
   background-color: #fc9;
-  border: 2px #c93 solid; border-bottom: 3px #c93;
+  border: 2px #c93 solid;
+  border-bottom: 3px #c93;
   border-collapse: collapse;
   border-style: solid dashed;
   border-width: 1px;
   border-color: #c93;
   padding: 0.3em;
-  font-size:80%;
+  font-size: 80%;
 }
-
-.bbtcycle {border: 2px #c93 solid; border-collapse: collapse; font-family: Verdana,sans-serif;}
-
+.bbtcycle {
+  border: 2px #c93 solid;
+  border-collapse: collapse;
+  font-family: Verdana, sans-serif;
+}
 /* cells */
-.bbtcycle td{ border-style:/*横ー縦*/ solid dashed; border-color: #c93; border-width: 1px; padding: 0.3em; font-size: 80%;}
-
+.bbtcycle td {
+  border-style: /*横ー縦*/ solid dashed;
+  border-color: #c93;
+  border-width: 1px;
+  padding: 0.3em;
+  font-size: 80%;
+}
 /* date cells */
-.bbtcycle td.date{ background-color: #ffc; font-weight: bold; font-size: 80%;}
-
+.bbtcycle td.date {
+  background-color: #ffffcc;
+  font-weight: bold;
+  font-size: 80%;
+}
 /* date cell for today */
-.bbtcycle tr.today { background-color: #fdd; }
-.bbtcycle tr.today td.date{ background-color: #fdd; }
-
+.bbtcycle tr.today {
+  background-color: #fdd;
+}
+.bbtcycle tr.today td.date {
+  background-color: #fdd;
+}
 /* cells that should be centered */
-.bbtcycle td.centerlize{ text-align: center;}
-
+.bbtcycle td.centerlize {
+  text-align: center;
+}
 .bigmessage {
-  color: rgb(68, 68, 68);
+  color: #444444;
   text-shadow: white 1px 1px 0;
   font-family: Helvetica, Arial, Sans;
   width: 700px;
@@ -116,12 +135,11 @@ table.bbtcycle {
   font-size: larger;
   text-align: center;
 }
-
-.ui-widget { font-size: 0.8em; }
-
-#footer {
-    text-align: center;
-    color: #999;
-    padding-bottom: 20px;
+.ui-widget {
+  font-size: 0.8em;
 }
-
+#footer {
+  text-align: center;
+  color: #999;
+  padding-bottom: 20px;
+}
