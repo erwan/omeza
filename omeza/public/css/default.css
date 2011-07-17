@@ -31,7 +31,7 @@ h1 {
   text-align: center;
 }
 #application-menu {
-  width: 140px;
+  width: 130px;
   display: inline;
   float: left;
   margin-left: 10px;
@@ -77,6 +77,9 @@ h1 {
 #application-menu .menu-item:hover {
   background: #ffcc99;
 }
+#innercontent {
+  float: right;
+}
 #newPeriod {
   padding: 10px 0 10px 25px;
 }
@@ -87,24 +90,24 @@ table.bbtcycle {
 }
 .bbtcycle th {
   background-color: #fc9;
-  border: 2px #c93 solid;
-  border-bottom: 3px #c93;
+  border: 2px #cc9933 solid;
+  border-bottom: 3px #cc9933;
   border-collapse: collapse;
   border-style: solid dashed;
   border-width: 1px;
-  border-color: #c93;
+  border-color: #cc9933;
   padding: 0.3em;
   font-size: 80%;
 }
 .bbtcycle {
-  border: 2px #c93 solid;
+  border: 2px #cc9933 solid;
   border-collapse: collapse;
   font-family: Verdana, sans-serif;
 }
 /* cells */
 .bbtcycle td {
-  border-style: /*横ー縦*/ solid dashed;
-  border-color: #c93;
+  border-style: solid dashed;
+  border-color: #cc9933;
   border-width: 1px;
   padding: 0.3em;
   font-size: 80%;

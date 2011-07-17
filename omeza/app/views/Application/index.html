@@ -1,13 +1,12 @@
 #{extends 'main.html' /}
 #{set title:'Omeza - Home' /}
 
-
 %{ m = play.i18n.Messages.&get }%
 
 #{set 'styles'}
 #{/}
 
-<div id="graph" hidden="false">
+<div id="graph">
 <div id="graphHide" class="open">show/hide graph</div>
 <div id="chart" class="chart" style="width: 780px; height: 270px; "></div>
 </div>
@@ -60,7 +59,6 @@ ${day.date.format(m('dateformat'))}
     <div id="blood-${day.id}" class="inplace">${day.blood}</div>
 </td>
 </tr>
-<!-- ...end for each day -->
 #{/list}
 </table></div>
 
@@ -71,9 +69,9 @@ ${day.date.format(m('dateformat'))}
 
 #{set 'scripts'}
 <!--[if IE]><script language="javascript" type="text/javascript" src="/public/js/flot/excanvas.pack.js"></script><![endif]-->
-<script src="/public/js/flot/jquery.flot.min.js"></script>
-<script src="/public/js/periods.js"></script>
-<script src="/public/js/jquery.jeditable.mini.js"></script>
+<script src="@{'/public/js/flot/jquery.flot.min.js'}"></script>
+<script src="@{'/public/js/periods.js'}"></script>
+<script src="@{'/public/js/lib/jquery.jeditable.mini.js'}"></script>
 <script>
 var editURL = "@{Periods.edit()}";
 var jsonURL = #{if period}"@{Periods.json(period.id)}"#{/}#{else}null#{/};

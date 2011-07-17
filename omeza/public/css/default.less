@@ -119,19 +119,20 @@ table.bbtcycle {
 
 .bbtcycle th{
   background-color: #fc9;
-  border: 2px #c93 solid; border-bottom: 3px #c93;
+  border: 2px @color1 solid;
+  border-bottom: 3px @color1;
   border-collapse: collapse;
   border-style: solid dashed;
   border-width: 1px;
-  border-color: #c93;
+  border-color: @color1;
   padding: 0.3em;
   font-size:80%;
 }
 
-.bbtcycle {border: 2px #c93 solid; border-collapse: collapse; font-family: Verdana,sans-serif;}
+.bbtcycle {border: 2px @color1 solid; border-collapse: collapse; font-family: Verdana,sans-serif;}
 
 /* cells */
-.bbtcycle td{ border-style:/*横ー縦*/ solid dashed; border-color: #c93; border-width: 1px; padding: 0.3em; font-size: 80%;}
+.bbtcycle td{ border-style: solid dashed; border-color: @color1; border-width: 1px; padding: 0.3em; font-size: 80%;}
 
 /* date cells */
 .bbtcycle td.date{ background-color: @color2; font-weight: bold; font-size: 80%;}
