@@ -1,12 +1,22 @@
 package controllers;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import models.Day;
+import models.Day.DaySerializer;
 import models.Period;
-import models.PeriodSerializer;
+import models.Period.PeriodSerializer;
+
+import org.mortbay.util.IO;
+
+import play.Logger;
 import play.modules.gae.GAE;
 import play.mvc.Controller;
+import play.utils.HTML;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class Periods extends Controller {
 
@@ -21,18 +31,29 @@ public class Periods extends Controller {
             badRequest();
         }
         period.delete();
-        renderText("OK");
+        ok();
     }
 
-    public static void edit(String id, String value) {
-        String[] splitted = id.split("\\-");
-        if (splitted.length != 2) badRequest();
-        Day day = Day.findById(Long.parseLong(splitted[1]));
+    public static void edit(Long periodId, Long dayId) throws Exception {
+        Day day = Day.findById(dayId);
         if (day == null || !getEmail().equals(day.user)) {
             badRequest();
         }
-        String response = day.updateField(splitted[0], value);
-        renderText(response);
+        JsonObject json = ((new JsonParser()).parse(IO.toString(request.body))).getAsJsonObject();
+        if (json.get("blood") != null)
+            day.blood = json.get("blood").getAsInt();
+        if (json.get("mucus") != null)
+            day.mucus = json.get("mucus").getAsInt();
+        if (json.get("temperature") != null)
+            day.temperature = json.get("temperature").getAsBigDecimal().multiply(BigDecimal.TEN).intValue();
+        if (json.get("sex") != null)
+            day.sex = json.get("sex").getAsString();
+        if (json.get("special") != null)
+            day.special = json.get("special").getAsString();
+        if (json.get("memo") != null)
+            day.memo = json.get("memo").getAsString();
+        day.update();
+        ok();
     }
 
     // ~~ API
@@ -43,7 +64,7 @@ public class Periods extends Controller {
         if (!getEmail().equals(period.user)) {
             badRequest();
         }
-        renderJSON(period, new PeriodSerializer());
+        renderJSON(period, new PeriodSerializer(), new DaySerializer());
     }
 
     // ~~

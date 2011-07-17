@@ -1,120 +1,99 @@
-Periods = {};
+(function() {
 
-Periods.init = function() {
-    $("#date-field").datepicker({ dateFormat: 'yy-mm-dd'});
-    $("#graphHide").click(function(){
-        $("#chart").slideToggle(500);
-    });
-    $(".inplace").editable(editURL, {
-        tooltip: 'Click to edit',
-        placeholder: '&nbsp;',
-        callback: function() {
-            Periods.chart();
+var DayModel = Backbone.Model.extend({
+    defaults: {
+        temperature: 0,
+        sex: "",
+        special: "",
+        memo: "",
+        mucus: 0,
+        blood: 0
+    }
+});
+
+var DayView = Backbone.View.extend({
+    tagName: "tr",
+/*    initialize: function() {
+        _.bindAll(this, "inPlaceEdit");
+    },*/
+    events: {
+        "click .editable": "inPlaceEdit"
+    },
+    template: _.template($('#day-template').html()),
+    render: function() {
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
+    },
+    inPlaceEdit: function(e) {
+        var attrName = $(e.currentTarget).data("field");
+        var newValue = parseInt(prompt("New value for: " + attrName), 10);
+        if (newValue) {
+            var attrs = {}; attrs[attrName] = newValue;
+            this.model.set(attrs);
+            console.log("set ", attrName, newValue);
+            this.model.save();
+            this.model.trigger("inplacechange");
         }
-    });
-    Periods.chart();
-};
+    }
+});
 
-Periods.triangleDown = function(plot, x, y, color) {
-    var o = plot.pointOffset({ x: x, y: y - 0.2 });
-    var ctx = plot.getCanvas().getContext("2d");
-    ctx.beginPath();
-    ctx.moveTo(o.left, o.top);
-    ctx.lineTo(o.left - 5, o.top + 10);
-    ctx.lineTo(o.left + 5, o.top + 10);
-    ctx.lineTo(o.left, o.top);
-    ctx.fillStyle = color;
-    ctx.fill();
-}
+var PeriodCollection = Backbone.Collection.extend({
+    url: jsonURL,
+    model: DayModel,
+    parse: function(response) {
+        return response.days;
+    }
+});
 
-Periods.triangleUp = function(plot, x, y, color) {
-    var o = plot.pointOffset({ x: x, y: y + 0.2 });
-    var ctx = plot.getCanvas().getContext("2d");
-    ctx.beginPath();
-    ctx.moveTo(o.left, o.top);
-    ctx.lineTo(o.left - 5, o.top - 10);
-    ctx.lineTo(o.left + 5, o.top - 10);
-    ctx.lineTo(o.left, o.top);
-    ctx.fillStyle = color;
-    ctx.fill();
-}
+var Period = new PeriodCollection();
 
-Periods.chart = function() {
-    if (!jsonURL) return; // TODO: Put a placeholder
-    $.get(jsonURL,
-        function(result) {
-            // For some reason, on app engine JsonNull becomes 0. Curse you!!
-            for (var i = 0; i < result.temperature.length; i++) {
-                if (result.temperature[i][1] === 0) {
-                    result.temperature[i][1] = null;
-                }
+var PeriodView = Backbone.View.extend({
+    el: $("#periodtable"),
+    initialize: function() {
+        _.bindAll(this, "render");
+        Period.bind("reset", this.render);
+        Period.bind("inplacechange", this.render);
+    },
+    render: function() {
+        console.log("Render PeriodView");
+        this.el.html('');
+        var $view = this.el;
+        var idx = 1;
+        Period.map(function(day) {
+            day.set({"idx": idx++});
+            return new DayView({model: day});
+        }).forEach(function(entry) {
+            $view.append(entry.render().el);
+        });
+    }
+
+});
+
+
+var AppView = Backbone.View.extend({
+    periodView: new PeriodView(),
+    initialize: function() {
+        Period.fetch();
+/*        $("#date-field").datepicker({ dateFormat: 'yy-mm-dd'});
+        $("#graphHide").click(function(){
+            $("#chart").slideToggle(500);
+        });
+        $(".inplace").editable(editURL, {
+            tooltip: 'Click to edit',
+            placeholder: '&nbsp;',
+            callback: function() {
+                Periods.chart();
             }
-            for (var i = 0; i < result.blood.length; i++) {
-                if (result.blood[i][1] === 0) {
-                    result.blood[i][1] = 30;
-                } else {
-                    result.blood[i][1] = 35.5 + (result.blood[i][1] * 0.2);
-                }
-            }
-            for (var i = 0; i < result.mucus.length; i++) {
-                if (result.mucus[i][1] === 0) {
-                    result.mucus[i][1] = 30;
-                } else {
-                    result.mucus[i][1] = 35.5 + (result.mucus[i][1] * 0.2);
-                }
-            }
-            var plot = $.plot($("#chart"),
-                [
-                    {
-                        label: i18n["temperature"],
-                        points: { show: true },
-                        lines: { show: true },
-                        data: result.temperature
-                    },
-                    { // Just to get the legend!
-                        label: i18n["sex"],
-                        data: [],
-                        color: "#FFB5D7"
-                    },
-                    { // Just to get the legend!
-                        label: i18n["special"],
-                        data: [],
-                        color: "#afd8f8"
-                    },
-                    {
-                        label: i18n["blood"],
-                        lines: { show: true, fill: true },
-                        data: result.blood,
-                        color: "#FF0000"
-                    },
-                    {
-                        label: i18n["mucus"],
-                        lines: { show: true, fill: true },
-                        data: result.mucus,
-                        color: "#FFFF00"
-                    }
-                ],
-                {
-                    xaxis: {
-                        min: 0,
-                        max: result.temperature.length
-                    },
-                    yaxis: {
-                        min: 35.5,
-                        max: 40
-                    }
-                }
-            );
-            for (var i = 0; i < result.sex.length; i++) {
-                var day = result.sex[i];
-                var y = result.temperature[day][1] ? result.temperature[day][1] : 37;
-                Periods.triangleDown(plot, day, y, "#FFB5D7");
-            }
-            for (var i = 0; i < result.special.length; i++) {
-                var day = result.special[i];
-                var y = result.temperature[day][1] ? result.temperature[day][1] : 37;
-                Periods.triangleUp(plot, day, y, "#afd8f8");
-            }
-        }
-    );
-}
+        });*/
+        // Chart.draw();
+    }
+});
+
+/* Backbone.sync = function(method, model, options) {
+    console.log("sync ", model);
+}*/ 
+
+window["Period"] = Period;
+window["App"] = new AppView();
+
+}());

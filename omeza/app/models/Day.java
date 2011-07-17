@@ -1,16 +1,23 @@
 package models;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import play.Logger;
+import play.utils.HTML;
 import siena.Id;
 import siena.Model;
 import siena.Query;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 public class Day extends Model {
     @Id
@@ -94,6 +101,26 @@ public class Day extends Model {
             return this.blood.toString();
         }
         return null;
+    }
+
+    public static class DaySerializer implements JsonSerializer<Day> {
+
+        public JsonElement serialize(Day day, Type type, JsonSerializationContext context) {
+            JsonObject result = new JsonObject();
+            result.addProperty("id", day.id);
+            result.add("date", context.serialize(day.date));
+            result.addProperty("temperature", day.temperature);
+            if (day.temperature != null) {
+                BigDecimal bd = new BigDecimal(day.temperature).divide(BigDecimal.TEN);
+                result.add("temperature", new JsonPrimitive(bd));
+            }
+            result.addProperty("sex", HTML.htmlEscape(day.sex));
+            result.addProperty("special", HTML.htmlEscape(day.special));
+            result.addProperty("memo", HTML.htmlEscape(day.memo));
+            result.addProperty("mucus", day.mucus);
+            result.addProperty("blood", day.blood);
+            return result;
+        }
     }
 
 }

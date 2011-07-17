@@ -16,6 +16,7 @@
 <input type="submit" value="Start">
 #{/form}
 
+
 #{if period}
 <div style="margin:0px">
 <table class="bbtcycle" cellpacing="0">
@@ -30,54 +31,34 @@
 <th width="35px">&{'mucus'}</th>
 <th width="35px">&{'blood'}</th></tr>
 </thead>
-
-{% c = 1 %}
-
-#{list period.days(), as:'day'}
-<tr #{if (day.today())}class="today"#{/} >
-
-<td class="date" width="100px">
-${day.date.format(m('dateformat'))}
-</td>
-<td class="date centerlize" width="35px" >${c}{% c++ %}</td>
-<td width="55px">
-    <div id="temperature-${day.id}" class="inplace">${day.temperature ? day.temperature / 10 : ""}</div>
-</td>
-<td class="centerlize" width="35px">
-    <div id="sex-${day.id}" class="inplace">${day.sex}</div>
-</td>
-<td class="centerlize" width="35px">
-    <div id="special-${day.id}" class="inplace">${day.special}</div>
-</td>
-<!--MEMO--><td width="360px">
-    <div id="memo-${day.id}" class="inplace">${day.memo}</div>
-</td>
-<!--粘液--><td class="centerlize"  width="35px">
-    <div id="mucus-${day.id}" class="inplace">${day.mucus}</div>
-</td>
-<!--血量--><td class="centerlize" width="35px">
-    <div id="blood-${day.id}" class="inplace">${day.blood}</div>
-</td>
-</tr>
-#{/list}
-</table></div>
+<tbody id="periodtable">
+</tbody>
+</table>
+</div>
 
 #{/if}
 #{else}
 <div class="bigmessage">No period! Create one to get started.</div>
 #{/else}
 
+<script type="text/template" id="day-template">
+<td class="date" width="100px"><%= date %></td>
+<td class="date centerlize" width="35px" ><%= idx %></td>
+<td class="editable" data-field="temperature" width="55px"><%= temperature == 0 ? "" : temperature %></td>
+<td class="editable centerlize" data-field="sex" width="35px"><%= sex %></td>
+<td class="editable centerlize" data-field="special" width="35px"><%= special %></td>
+<td class="editable" width="360px" data-field="memo"><%= memo %></td>
+<td class="editable centerlize" data-field="mucus" width="35px"><%= mucus == 0 ? "" : mucus %></td>
+<td class="editable centerlize" data-field="blood" width="35px"><%= blood == 0 ? "" : blood %></td>
+</script>
+
 #{set 'scripts'}
 <!--[if IE]><script language="javascript" type="text/javascript" src="/public/js/flot/excanvas.pack.js"></script><![endif]-->
 <script src="@{'/public/js/flot/jquery.flot.min.js'}"></script>
-<script src="@{'/public/js/periods.js'}"></script>
-<script src="@{'/public/js/lib/jquery.jeditable.mini.js'}"></script>
 <script>
 var editURL = "@{Periods.edit()}";
 var jsonURL = #{if period}"@{Periods.json(period.id)}"#{/}#{else}null#{/};
-
-$(function(){
-    Periods.init();
-});
 </script>
+<script src="@{'/public/js/periods.js'}"></script>
+<script src="@{'/public/js/graph.js'}"></script>
 #{/}

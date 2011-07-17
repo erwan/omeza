@@ -1,7 +1,7 @@
 package models;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,6 +14,11 @@ import siena.Id;
 import siena.Model;
 import siena.Query;
 import utils.Lib;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 public class Period extends siena.Model { // TODO: See why no crud implements play.db.Model {
     @Id
@@ -137,6 +142,15 @@ public class Period extends siena.Model { // TODO: See why no crud implements pl
         }
         public Period last() {
             return this.periods.get(this.periods.size() - 1);
+        }
+    }
+
+    public static class PeriodSerializer implements JsonSerializer<Period> {
+
+        public JsonElement serialize(Period period, Type type, JsonSerializationContext context) {
+            JsonObject result = new JsonObject();
+            result.add("days", context.serialize(period.days()));
+            return result;
         }
     }
 

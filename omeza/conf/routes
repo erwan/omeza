@@ -9,6 +9,7 @@ GET     /favicon.ico                            Application.favicon
 POST    /periods/new                            Periods.create
 GET     /periods/{<[0-9]+>periodId}             Application.period
 GET     /periods/{<[0-9]+>periodId}/json        Periods.json
+PUT     /periods/{<[0-9]+>periodId}/json/{<[0-9]+>dayId} Periods.edit
 POST    /periods/edit                           Periods.edit
 POST    /periods/delete                         Periods.delete
 GET     /archive                                Application.archive
